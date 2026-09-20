@@ -1,0 +1,11 @@
+5AFM2627 - CARICAMENTO SENZA CARTELLE
+
+1. Estrai questo ZIP.
+2. Apri la cartella estratta e seleziona tutti i file (Ctrl+A).
+3. Nel repository GitHub 5AFM2627: Add file > Upload files > choose your files.
+4. Seleziona tutti questi file e premi Commit changes.
+5. Settings > Pages: Deploy from a branch, main, / (root), Save.
+
+Non caricare lo ZIP: carica i file estratti. Non servono sottocartelle.
+Le eventuali vecchie cartelle materiale e giochi possono restare: la nuova pagina principale usa questi file.
+Accessi e risultati online rimangono invariati.
