@@ -224,17 +224,17 @@ const CHAPTERS = { alfa: [
   [0,    "Dati del testo e conto economico 2016"],
   [209,  "Ammortamenti, personale e TFR 2016"],
   [431,  "Stato patrimoniale 2016"],
-  [597,  "Vendite e personale 2017"],
-  [865,  "Scritture del personale 2017"],
-  [1148, "Utile 2016 e aumento di capitale"],
-  [1378, "Vendita del macchinario, nuovo impianto, ammortamenti"],
+  [596,  "Vendite e personale 2017"],
+  [863,  "Scritture del personale 2017"],
+  [1145, "Utile 2016 e aumento di capitale"],
+  [1376, "Vendita del macchinario, nuovo impianto, ammortamenti"],
   [1760, "Costi, incassi e pagamenti 2017"],
-  [1906, "Imposte, IVA e stato patrimoniale finale"],
+  [1905, "Imposte, IVA e stato patrimoniale finale"],
 ]};
 
 const mmss = s => Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0");
 
-const DUR = { personale: "6:14", pagamento: "5:20", immobilizzazioni: "4:43", gratuito: "4:40", alfa: "34:54" };
+const DUR = { personale: "6:14", pagamento: "5:20", immobilizzazioni: "4:43", gratuito: "4:40", alfa: "34:50" };
 
 function cover(box, key) {
   const v = VIDEO[key] || {};
