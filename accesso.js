@@ -49,6 +49,7 @@
       : `<span>N. ${String(profile.student).padStart(2, '0')}</span><button type="button">Esci</button>`;
     who.querySelector('button').onclick = Accesso.logout;
     document.body.appendChild(who);
+    if (location.hash) setTimeout(() => { const t = document.getElementById(decodeURIComponent(location.hash.slice(1))); if (t) t.scrollIntoView({ block: 'start' }); }, 60);
     resolveReady(profile);
   }
 
@@ -66,7 +67,7 @@
     <select id="gNum" required><option value="">Scegli…</option>${Array.from({ length: STUDENTI }, (_, i) => `<option value="${i + 1}">${String(i + 1).padStart(2, '0')}</option>`).join('')}</select>
     <label for="gData">Compleanno (giorno e mese)</label>
     <input id="gData" inputmode="numeric" autocomplete="off" placeholder="gg/mm" aria-describedby="gHint">
-    <p class="hint" id="gHint">Per esempio 16/09 se sei nato il 16 settembre</p>
+    <p class="hint" id="gHint">Per esempio 16/09 oppure 1609 se sei nato il 16 settembre</p>
   </div>
   <div id="gDoc" hidden>
     <label for="gMail">Email</label>
