@@ -89,6 +89,9 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding-top:18px;display
 @media(max-width:900px){.feature{grid-template-columns:1fr}.chap{border-left:0;border-top:1px solid var(--line)}}
 @media(max-width:760px){.wrap{padding:0 18px}.lessons,.print{grid-template-columns:1fr}.top nav{display:none}.section-title{flex-direction:column;align-items:flex-start;gap:4px}footer{flex-direction:column}}
 </style>
+<script src="config.js"></script>
+<script src="cloud.js"></script>
+<script src="accesso.js"></script>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -232,6 +235,48 @@ const CHAPTERS = { alfa: [
   [1905, "Imposte, IVA e stato patrimoniale finale"],
 ]};
 
+/* REGISTRO VIDEO: play, pausa, salti, fine e secondi realmente guardati (solo studenti). */
+const Track = (() => {
+  const isStudent = () => window.Accesso && Accesso.profile && Accesso.profile.role === "student";
+  const uuid = () => (crypto.randomUUID ? crypto.randomUUID()
+    : "10000000-1000-4000-8000-100000000000".replace(/[018]/g, c => (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)));
+  function attach(el, key) {
+    let session = null, last = null, acc = 0, lastSent = 0, seekFrom = null;
+    const send = (kind, from = null, keepalive = false) => {
+      if (!isStudent()) return;
+      if (!session || Date.now() - lastSent > 30 * 60 * 1000) session = uuid();   // dopo 30 minuti di pausa conta come nuova visione
+      const watched = Math.round(acc * 10) / 10; acc = 0; lastSent = Date.now();
+      Cloud.video({
+        p_video: key, p_session: session, p_kind: kind,
+        p_pos: Math.round(el.currentTime * 10) / 10,
+        p_dur: isFinite(el.duration) ? Math.round(el.duration) : null,
+        p_watched: watched, p_from: from == null ? null : Math.round(from * 10) / 10
+      }, keepalive).catch(() => {});
+    };
+    el.addEventListener("play", () => { last = el.currentTime; send("play"); });
+    el.addEventListener("timeupdate", () => {
+      const t = el.currentTime;
+      if (!el.paused && !el.seeking && last != null) {
+        const d = t - last;
+        if (d > 0 && d < 2 * (el.playbackRate || 1) + 1) acc += d;
+      }
+      last = t;
+      if (!el.paused && Date.now() - lastSent >= 15000) send("progress");
+    });
+    el.addEventListener("seeking", () => { if (seekFrom == null) seekFrom = last; });
+    el.addEventListener("seeked", () => {
+      const from = seekFrom; seekFrom = null; last = el.currentTime;
+      if (session && from != null && Math.abs(el.currentTime - from) > 2) send("seek", from);
+    });
+    el.addEventListener("pause", () => { if (!el.ended && !el.seeking) send("pause"); });
+    el.addEventListener("ended", () => send("ended"));
+    const bye = () => { if (session && (acc > 0 || !el.paused)) send("close", null, true); };
+    addEventListener("pagehide", bye);
+    document.addEventListener("visibilitychange", () => { if (document.visibilityState === "hidden") bye(); });
+  }
+  return { attach };
+})();
+
 const mmss = s => Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0");
 
 const DUR = { personale: "6:14", pagamento: "5:20", immobilizzazioni: "4:43", gratuito: "4:40", alfa: "34:50" };
@@ -253,6 +298,7 @@ function mount(box, key, start) {
   if (!el) {
     box.innerHTML = `<video controls playsinline preload="metadata" poster="${v.poster || ""}" src="${v.mp4}"></video>`;
     el = box.querySelector("video");
+    Track.attach(el, key);
   }
   const go = () => { if (start) el.currentTime = start; el.play().catch(() => {}); };
   el.readyState >= 1 ? go() : el.addEventListener("loadedmetadata", go, { once: true });

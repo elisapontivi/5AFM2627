@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>5AFM2627 · Registro video</title>
+<style>
+:root{--ink:#102f43;--muted:#526776;--line:#d7e2e8;--blue:#174e70;--bar:#2f74a3;--soft:#edf4fa;--bg:#f4f7fa;--green:#156950;--warn:#c36d00;--red:#a32121}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,Segoe UI,sans-serif}
+a{color:var(--blue)}
+button{font:inherit;cursor:pointer}
+button:focus-visible,a:focus-visible{outline:3px solid #df9517;outline-offset:2px}
+.wrap{max-width:1200px;margin:auto;padding:0 24px}
+.top{background:var(--ink);color:#fff}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:16px}
+.brand{color:#fff;font-weight:800;font-size:20px;text-decoration:none;letter-spacing:.03em}
+.top nav a{color:#d4e1ea;text-decoration:none;font-weight:600;font-size:14px;margin-left:14px}
+h1{font-size:32px;letter-spacing:-.02em;margin:30px 0 4px}
+.lead{color:var(--muted);margin:0 0 20px}
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 20px}
+.btn{border:1.5px solid var(--blue);background:#fff;color:var(--blue);border-radius:9px;padding:8px 14px;font-weight:700}
+.btn.danger{border-color:var(--red);color:var(--red)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:22px}
+.stat{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 16px}
+.stat span{display:block;color:var(--muted);font-size:13px}
+.stat b{font-size:26px;line-height:1.2}
+.panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 18px 14px;margin-bottom:22px}
+.panel h2{font-size:20px;margin:0 0 4px}
+.panel .sub{color:var(--muted);font-size:14px;margin:0 0 14px}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:860px}
+th,td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:middle}
+thead th{font-size:13px;color:var(--muted);font-weight:700;position:sticky;top:0;background:#fff}
+tbody th{font-weight:700;white-space:nowrap;font-size:14px}
+td.cell{padding:4px}
+.cellbtn{display:block;width:100%;text-align:left;background:none;border:1px solid transparent;border-radius:8px;padding:6px 8px;color:inherit}
+.cellbtn:hover{background:var(--soft);border-color:var(--line)}
+.meter{height:7px;border-radius:4px;background:#e4ecf1;overflow:hidden;margin-bottom:4px}
+.meter i{display:block;height:100%;background:var(--bar);border-radius:4px}
+.cellbtn .t{font-size:13px;font-weight:700}
+.cellbtn .s{font-size:12px;color:var(--muted)}
+.none{color:#9aabb6;font-size:13px;padding:6px 12px;display:block}
+.ok{color:var(--green);font-weight:800}
+.strip{display:flex;align-items:flex-end;gap:1px;height:90px;border-bottom:1px solid #9aabb6;margin-top:6px}
+.strip span{flex:1;background:var(--bar);border-radius:2px 2px 0 0;min-width:2px}
+.strip span.z{background:transparent}
+.axis{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:3px}
+.vid{margin-bottom:22px}
+.vid h3{font-size:15px;margin:0}
+.vid .meta{font-size:13px;color:var(--muted)}
+dialog{border:0;border-radius:14px;padding:0;width:min(820px,96vw);box-shadow:0 20px 60px rgba(0,0,0,.3)}
+dialog::backdrop{background:rgba(16,47,67,.55)}
+.dlg{padding:20px 22px}
+.dlg header{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.dlg h2{margin:0;font-size:21px}
+.x{border:0;background:none;font-size:26px;line-height:1;color:var(--muted)}
+.tl{position:relative;height:30px;background:#e4ecf1;border-radius:6px;margin:16px 0 4px;overflow:hidden}
+.tl .seg{position:absolute;top:0;bottom:0;background:var(--bar)}
+.tl .p{position:absolute;top:0;bottom:0;width:2px;background:var(--warn)}
+.tl .e{position:absolute;top:0;bottom:0;width:3px;background:var(--red)}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin:6px 0 14px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:2px;vertical-align:-1px;margin-right:5px}
+.sessions{width:100%;min-width:0;font-size:14px}
+.msg{background:#fff;border:1px solid var(--line);border-radius:14px;padding:30px;margin:30px 0;text-align:center}
+.small{font-size:13px;color:var(--muted)}
+</style>
+<script src="config.js"></script>
+<script src="cloud.js"></script>
+<script src="accesso.js"></script>
+</head>
+<body>
+<div class="top"><div class="wrap">
+  <a class="brand" href="index.html">5AFM2627</a>
+  <nav><a href="esercizi-spiegati.html">Esercizi spiegati</a><a href="index.html">Materiale</a></nav>
+</div></div>
+<main class="wrap" id="app"><p class="msg">Caricamento…</p></main>
+
+<dialog id="dlg"><div class="dlg" id="dlgBody"></div></dialog>
+
+<script>
+const STUDENTI = 26;
+const VIDEOS = [
+  { key: "personale",        name: "L1 · Personale e TFR",            dur: 374 },
+  { key: "pagamento",        name: "L2 · Aumento a pagamento",        dur: 320 },
+  { key: "immobilizzazioni", name: "L3 · Immobilizzazioni",           dur: 283 },
+  { key: "gratuito",         name: "L4 · Aumento gratuito",           dur: 280 },
+  { key: "alfa",             name: "Alfa spa · Esame 2018",           dur: 2090 },
+];
+const CHAPTERS = { alfa: [[0,"Dati e CE 2016"],[209,"Ammortamenti, personale e TFR 2016"],[431,"SP 2016"],[596,"Vendite e personale 2017"],[863,"Scritture del personale 2017"],[1145,"Utile 2016 e aumento di capitale"],[1376,"Vendita, nuovo impianto, ammortamenti"],[1760,"Costi, incassi e pagamenti 2017"],[1905,"Imposte, IVA e SP finale"]] };
+
+const app = document.getElementById("app");
+const dlg = document.getElementById("dlg");
+const esc = t => String(t).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"})[c]);
+const two = n => String(n).padStart(2, "0");
+const mmss = s => { s = Math.max(0, Math.round(s || 0)); return Math.floor(s / 60) + ":" + two(s % 60); };
+const minuti = s => { const m = (s || 0) / 60; return m < 10 ? m.toFixed(1).replace(".", ",") : String(Math.round(m)); };
+const when = d => d ? new Date(d).toLocaleString("it-IT", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" }) : "";
+const vinfo = key => VIDEOS.find(v => v.key === key) || { key, name: key, dur: 0 };
+const chapterAt = (key, t) => { const c = (CHAPTERS[key] || []).filter(([s]) => s <= t).pop(); return c ? c[1] : ""; };
+
+let data = { righe: [], minuti: [] };
+
+function cov(r) {
+  const dur = r.dur || vinfo(r.video).dur;
+  return dur ? Math.min(100, Math.round(100 * r.blocchi / Math.ceil(dur / 30))) : 0;
+}
+
+function render() {
+  const rows = data.righe;
+  const byKey = new Map(rows.map(r => [r.student + "|" + r.video, r]));
+  const active = new Set(rows.map(r => r.student)).size;
+  const visioni = rows.reduce((a, r) => a + r.visioni, 0);
+  const sec = rows.reduce((a, r) => a + Number(r.secondi || 0), 0);
+
+  app.innerHTML = `
+<h1>Registro video</h1>
+<p class="lead">Chi ha guardato i video, quante volte, quanta parte e dove si è fermato. Clicca una casella per il dettaglio.</p>
+<div class="toolbar">
+  <button class="btn" id="refresh">Aggiorna</button>
+  <button class="btn" id="csv">↓ Scarica CSV</button>
+  <button class="btn danger" id="reset">Azzera registro</button>
+</div>
+<div class="stats">
+  <div class="stat"><span>Studenti che hanno guardato</span><b>${active}</b> / ${STUDENTI}</div>
+  <div class="stat"><span>Visioni in totale</span><b>${visioni}</b></div>
+  <div class="stat"><span>Tempo di visione in totale</span><b>${Math.floor(sec / 3600)} h ${two(Math.round(sec % 3600 / 60))} min</b></div>
+</div>
+<section class="panel">
+  <h2>Studente per studente</h2>
+  <p class="sub">Barra = parte del video effettivamente vista · “fermo a” = punto in cui ha chiuso l’ultima visione · ✓ = arrivato alla fine.</p>
+  <div class="tablewrap"><table>
+    <caption class="small" style="text-align:left;padding-bottom:6px">Visioni dei ${VIDEOS.length} video per numero di registro</caption>
+    <thead><tr><th scope="col">N.</th>${VIDEOS.map(v => `<th scope="col">${v.name}</th>`).join("")}</tr></thead>
+    <tbody>${Array.from({ length: STUDENTI }, (_, i) => {
+      const s = i + 1;
+      return `<tr><th scope="row">${two(s)}</th>${VIDEOS.map(v => {
+        const r = byKey.get(s + "|" + v.key);
+        if (!r) return `<td class="cell"><span class="none">—</span></td>`;
+        const c = cov(r);
+        return `<td class="cell"><button class="cellbtn" data-s="${s}" data-v="${v.key}" aria-label="Dettaglio studente ${s}, ${v.name}">
+          <div class="meter" aria-hidden="true"><i style="width:${c}%"></i></div>
+          <div class="t">${c}% · ${r.visioni} ${r.visioni === 1 ? "visione" : "visioni"} ${r.finito ? '<span class="ok" title="Arrivato alla fine">✓</span>' : ""}</div>
+          <div class="s">${minuti(r.secondi)} min · fermo a ${mmss(r.stop)}</div>
+        </button></td>`;
+      }).join("")}</tr>`;
+    }).join("")}</tbody>
+  </table></div>
+</section>
+<section class="panel">
+  <h2>Dove si smette di guardare</h2>
+  <p class="sub">Ogni barra è un tratto di 30 secondi: l’altezza dice quanti studenti l’hanno guardato. Dove le barre si abbassano, molti si sono fermati o hanno saltato.</p>
+  ${VIDEOS.map(stripHTML).join("")}
+</section>
+<p class="small">Gli eventi vengono registrati solo quando uno studente guarda un video dopo aver fatto l’accesso. Le tue visioni da insegnante non vengono registrate.</p>`;
+
+  app.querySelector("#refresh").onclick = load;
+  app.querySelector("#csv").onclick = csv;
+  app.querySelector("#reset").onclick = reset;
+  app.querySelectorAll(".cellbtn").forEach(b => b.onclick = () => detail(Number(b.dataset.s), b.dataset.v));
+}
+
+function stripHTML(v) {
+  const nb = Math.ceil(v.dur / 30);
+  const counts = new Array(nb).fill(0);
+  data.minuti.filter(m => m.video === v.key && m.b < nb).forEach(m => counts[m.b] = m.n);
+  const max = Math.max(1, ...counts);
+  const viewers = new Set(data.righe.filter(r => r.video === v.key).map(r => r.student)).size;
+  const ticks = [0, 0.25, 0.5, 0.75, 1].map(f => `<span>${mmss(f * v.dur)}</span>`).join("");
+  return `<div class="vid"><h3>${v.name}</h3><div class="meta">${viewers} studenti · massimo ${max === 1 && !counts.some(Boolean) ? 0 : max} sullo stesso tratto</div>
+    <div class="strip" role="img" aria-label="${v.name}: studenti per ogni tratto di 30 secondi">${counts.map((n, b) => {
+      const ch = chapterAt(v.key, b * 30);
+      return `<span class="${n ? "" : "z"}" style="height:${n ? Math.max(4, 100 * n / max) : 0}%" title="${mmss(b * 30)}–${mmss(Math.min(v.dur, b * 30 + 30))} · ${n} ${n === 1 ? "studente" : "studenti"}${ch ? " · " + ch : ""}"></span>`;
+    }).join("")}</div><div class="axis">${ticks}</div></div>`;
+}
+
+async function detail(student, key) {
+  const v = vinfo(key), r = data.righe.find(x => x.student === student && x.video === key);
+  const body = document.getElementById("dlgBody");
+  body.innerHTML = `<p>Caricamento…</p>`;
+  dlg.showModal();
+  let ev;
+  try { ev = await Cloud.videoDetail(student, key); }
+  catch (e) { body.innerHTML = `<p>${esc(e.message)}</p><button class="btn" onclick="dlg.close()">Chiudi</button>`; return; }
+  const dur = (r && r.dur) || v.dur;
+  const pct = t => Math.min(100, Math.max(0, 100 * t / dur)).toFixed(2) + "%";
+
+  // tratti guardati (uniti), pause e fine di ogni visione
+  const segs = ev.filter(e => e.watched > 0).map(e => [Math.max(0, e.pos - e.watched), e.pos]).sort((a, b) => a[0] - b[0]);
+  const merged = [];
+  segs.forEach(([a, b]) => { const l = merged[merged.length - 1]; if (l && a <= l[1] + 2) l[1] = Math.max(l[1], b); else merged.push([a, b]); });
+  const sessions = [];
+  ev.forEach(e => { let s = sessions.find(x => x.id === e.session); if (!s) sessions.push(s = { id: e.session, ev: [] }); s.ev.push(e); });
+  const pauses = ev.filter(e => e.kind === "pause").map(e => e.pos);
+  const ends = sessions.map(s => s.ev[s.ev.length - 1].pos);
+
+  body.innerHTML = `
+<header><div><h2>N. ${two(student)} · ${v.name}</h2>
+<p class="small" style="margin:2px 0 0">${sessions.length} ${sessions.length === 1 ? "visione" : "visioni"} · ${minuti(ev.reduce((a, e) => a + Number(e.watched), 0))} min guardati · durata del video ${mmss(dur)}</p></div>
+<button class="x" aria-label="Chiudi" onclick="dlg.close()">×</button></header>
+<div class="tl" role="img" aria-label="Parti del video guardate">
+  ${merged.map(([a, b]) => `<span class="seg" style="left:${pct(a)};width:calc(${pct(b)} - ${pct(a)})"></span>`).join("")}
+  ${pauses.map(p => `<span class="p" style="left:${pct(p)}" title="Pausa a ${mmss(p)}"></span>`).join("")}
+  ${ends.map(p => `<span class="e" style="left:${pct(p)}" title="Fine visione a ${mmss(p)}"></span>`).join("")}
+</div>
+<div class="axis"><span>0:00</span><span>${mmss(dur / 2)}</span><span>${mmss(dur)}</span></div>
+<div class="legend"><span><i style="background:var(--bar)"></i>parte guardata</span><span><i style="background:var(--warn)"></i>pausa</span><span><i style="background:var(--red)"></i>chiusura di una visione</span></div>
+<table class="sessions"><thead><tr><th>Quando</th><th>Minuti guardati</th><th>Da → a</th><th>Pause</th><th>Salti avanti / indietro</th><th>Si è fermato a</th></tr></thead>
+<tbody>${sessions.map(s => {
+  const w = s.ev.reduce((a, e) => a + Number(e.watched), 0);
+  const first = s.ev[0], last = s.ev[s.ev.length - 1];
+  const seeks = s.ev.filter(e => e.kind === "seek");
+  const fwd = seeks.filter(e => e.pos > e.from).length, back = seeks.length - fwd;
+  const ch = chapterAt(key, last.pos);
+  return `<tr><td>${when(first.at)}</td><td>${minuti(w)}</td><td>${mmss(first.pos)} → ${mmss(Math.max(...s.ev.map(e => e.pos)))}</td>
+    <td>${s.ev.filter(e => e.kind === "pause").length}</td><td>${fwd} / ${back}</td>
+    <td>${s.ev.some(e => e.kind === "ended") ? '<span class="ok">fine ✓</span>' : mmss(last.pos)}${ch ? `<br><span class="small">${ch}</span>` : ""}</td></tr>`;
+}).join("")}</tbody></table>`;
+}
+
+function csv() {
+  const head = ["Studente", "Video", "Visioni", "Minuti guardati", "Parte vista %", "Arrivato alla fine", "Fermo a", "Pause", "Salti avanti", "Torna indietro", "Prima visione", "Ultima visione"];
+  const lines = data.righe.map(r => [two(r.student), vinfo(r.video).name, r.visioni, minuti(r.secondi), cov(r), r.finito ? "sì" : "no", mmss(r.stop), r.pause, r.avanti, r.indietro, when(r.primo), when(r.ultimo)]);
+  const text = "﻿" + [head, ...lines].map(l => l.map(x => `"${String(x).replace(/"/g, '""')}"`).join(";")).join("\r\n");
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([text], { type: "text/csv;charset=utf-8" }));
+  a.download = "registro_video_5AFM_" + new Date().toISOString().slice(0, 10) + ".csv";
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+}
+
+async function reset() {
+  if (!confirm("Cancellare tutto il registro dei video?\n\nVisioni, pause e tempi di tutti gli studenti saranno eliminati definitivamente. Puoi scaricare prima il CSV.\n\nConfermi?")) return;
+  try { await Cloud.videoReset(); await load(); } catch (e) { alert(e.message); }
+}
+
+async function load() {
+  try { data = await Cloud.videoReport(); render(); }
+  catch (e) {
+    app.innerHTML = `<div class="msg"><p><b>Il registro non è disponibile.</b></p><p class="small">${esc(e.message)}</p><p class="small">Se è la prima volta, controlla di aver eseguito in Supabase il file <code>supabase_1_registro_video.sql</code>.</p></div>`;
+  }
+}
+
+Accesso.ready.then(p => {
+  if (p.role !== "teacher") {
+    app.innerHTML = `<div class="msg"><p><b>Questa pagina è riservata all’insegnante.</b></p><p><a href="esercizi-spiegati.html">Vai agli esercizi spiegati</a></p></div>`;
+    return;
+  }
+  load();
+});
+</script>
+</body>
+</html>
