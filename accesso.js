@@ -76,7 +76,6 @@
   </div>
   <p class="err" id="gErr" role="alert"></p>
   <button class="go" type="submit">Entra</button>
-  <p class="note" id="gNote">Il sito registra quali video guardi, quante volte e fino a che punto, per aiutare l’insegnante a capire quali parti sono più difficili.</p>
   <button class="link" type="button" id="gSwitch">Accesso insegnante</button>
 </form>`;
     document.body.appendChild(gate);
@@ -85,7 +84,7 @@
 
     $('gSwitch').onclick = () => {
       docente = !docente;
-      $('gStud').hidden = docente; $('gDoc').hidden = !docente; $('gNote').hidden = docente;
+      $('gStud').hidden = docente; $('gDoc').hidden = !docente;
       $('gSub').textContent = docente ? 'Entra con la tua email e la tua password.' : 'Scegli il tuo numero di registro e scrivi il tuo compleanno.';
       $('gSwitch').textContent = docente ? 'Sono uno studente' : 'Accesso insegnante';
       err.textContent = '';
