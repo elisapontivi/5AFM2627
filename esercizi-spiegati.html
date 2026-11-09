@@ -114,7 +114,7 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding-top:18px;display
   <h1>Esercizi spiegati</h1>
   <p>Guarda la video-lezione, studia sulla scheda e poi prova da solo gli esercizi: le soluzioni sono in fondo a ogni scheda.</p>
   <div class="stats">
-    <div class="stat"><b>4</b><span>video-lezioni</span></div>
+    <div class="stat"><b>5</b><span>video-lezioni</span></div>
     <div class="stat"><b>1</b><span>prova d'esame svolta</span></div>
     <div class="stat"><b>5</b><span>schede con esercizi</span></div>
     <div class="stat"><b>2</b><span>prospetti da stampare</span></div>
@@ -134,6 +134,18 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding-top:18px;display
       <div class="files">
         <a class="file main" href="Scheda_1_costi_del_personale_e_TFR.pdf" target="_blank" rel="noopener"><svg><use href="#i-doc"/></svg>Scheda di studio</a>
         <a class="file alt" href="appunti_costi_del_personale.pdf" target="_blank" rel="noopener"><svg><use href="#i-pen"/></svg>Appunti della prof</a>
+      </div>
+    </div>
+  </article>
+
+  <article class="lesson" id="riepilogo-personale">
+    <div class="player" data-video="riepilogo"></div>
+    <div class="body">
+      <div class="meta"><span class="badge">Riepilogo</span><span class="time"><svg width="14" height="14"><use href="#i-clock"/></svg>6 min</span></div>
+      <h3>Costi del personale: 2025 o 2026?</h3>
+      <p class="d">Quali numeri usare nella prova: i costi e il debito per TFR del 2025, i salari del 2026 per scritture, banca e TFR. Con l'indennità di malattia e il mastrino dei debiti verso istituti previdenziali.</p>
+      <div class="files">
+        <a class="file main" href="Riepilogo_costi_del_personale.pdf" target="_blank" rel="noopener"><svg><use href="#i-doc"/></svg>Scheda con esempio e scritture</a>
       </div>
     </div>
   </article>
@@ -216,6 +228,7 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding-top:18px;display
 /* VIDEO: se "youtube" contiene l'ID di un video YouTube si usa quello, altrimenti il file mp4 del repository. */
 const VIDEO = {
   personale:        { youtube: "", mp4: "video_lezione_1_personale_e_TFR.mp4",                  poster: "poster_lezione_1_personale_e_TFR.jpg" },
+  riepilogo:        { youtube: "", mp4: "video_riepilogo_costi_personale.mp4",                  poster: "poster_riepilogo_costi_personale.jpg" },
   pagamento:        { youtube: "", mp4: "video_lezione_2_aumento_a_pagamento.mp4",              poster: "poster_lezione_2_aumento_a_pagamento.jpg" },
   immobilizzazioni: { youtube: "", mp4: "video_lezione_3_vendita_e_acquisto_immobilizzazioni.mp4", poster: "poster_lezione_3_vendita_e_acquisto_immobilizzazioni.jpg" },
   gratuito:         { youtube: "", mp4: "video_lezione_4_aumento_gratuito.mp4",                 poster: "poster_lezione_4_aumento_gratuito.jpg" },
@@ -278,7 +291,7 @@ const Track = (() => {
 
 const mmss = s => Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0");
 
-const DUR = { personale: "6:14", pagamento: "5:20", immobilizzazioni: "4:43", gratuito: "4:40", alfa: "34:50" };
+const DUR = { riepilogo: "5:59", personale: "6:14", pagamento: "5:20", immobilizzazioni: "4:43", gratuito: "4:40", alfa: "34:50" };
 
 function cover(box, key) {
   const v = VIDEO[key] || {};
