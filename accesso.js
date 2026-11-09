@@ -1,9 +1,9 @@
 'use strict';
-/* Accesso al sito: numero di registro + data di nascita.
+/* Accesso al sito: numero di registro + compleanno (ggmm).
    Va caricato nel <head> DOPO config.js e cloud.js.
    Espone window.Accesso = { ready: Promise<profilo>, profile, logout() } */
 (() => {
-  const STUDENTI = 26;
+  const STUDENTI = 27;
   const root = document.documentElement;
   root.classList.add('gated');
 
@@ -60,13 +60,13 @@
 <form novalidate aria-labelledby="gateTitle">
   <p class="k">5AFM2627 · Economia aziendale</p>
   <h1 id="gateTitle">Accedi al materiale</h1>
-  <p class="sub" id="gSub">Scegli il tuo numero di registro e scrivi la tua data di nascita.</p>
+  <p class="sub" id="gSub">Scegli il tuo numero di registro e scrivi il tuo compleanno.</p>
   <div id="gStud">
     <label for="gNum">Numero di registro</label>
     <select id="gNum" required><option value="">Scegli…</option>${Array.from({ length: STUDENTI }, (_, i) => `<option value="${i + 1}">${String(i + 1).padStart(2, '0')}</option>`).join('')}</select>
-    <label for="gData">Data di nascita</label>
-    <input id="gData" inputmode="numeric" autocomplete="off" placeholder="gg/mm/aaaa" aria-describedby="gHint">
-    <p class="hint" id="gHint">Per esempio 14/03/2008</p>
+    <label for="gData">Compleanno (giorno e mese)</label>
+    <input id="gData" inputmode="numeric" autocomplete="off" placeholder="gg/mm" aria-describedby="gHint">
+    <p class="hint" id="gHint">Per esempio 16/09 se sei nato il 16 settembre</p>
   </div>
   <div id="gDoc" hidden>
     <label for="gMail">Email</label>
@@ -86,7 +86,7 @@
     $('gSwitch').onclick = () => {
       docente = !docente;
       $('gStud').hidden = docente; $('gDoc').hidden = !docente; $('gNote').hidden = docente;
-      $('gSub').textContent = docente ? 'Entra con la tua email e la tua password.' : 'Scegli il tuo numero di registro e scrivi la tua data di nascita.';
+      $('gSub').textContent = docente ? 'Entra con la tua email e la tua password.' : 'Scegli il tuo numero di registro e scrivi il tuo compleanno.';
       $('gSwitch').textContent = docente ? 'Sono uno studente' : 'Accesso insegnante';
       err.textContent = '';
       $(docente ? 'gMail' : 'gNum').focus();
@@ -101,9 +101,9 @@
         if (!mail || !pass) { err.textContent = 'Scrivi email e password.'; return; }
       } else {
         target = Number($('gNum').value);
-        pass = $('gData').value.trim();          // cloud.js la trasforma in ggmmaa
+        pass = $('gData').value.trim();          // cloud.js la trasforma in ggmm
         if (!target) { err.textContent = 'Scegli il tuo numero di registro.'; $('gNum').focus(); return; }
-        if (!pass) { err.textContent = 'Scrivi la data così: 14/03/2008'; $('gData').focus(); return; }
+        if (!pass) { err.textContent = 'Scrivi giorno e mese così: 16/09'; $('gData').focus(); return; }
       }
       const btn = gate.querySelector('button.go');
       btn.disabled = true; btn.textContent = 'Accesso in corso…';

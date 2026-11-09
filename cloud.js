@@ -5,8 +5,8 @@ const Cloud = (() => {
  function keep(){remember=true;try{const saved=JSON.parse(sessionStorage.getItem(KEY)||'null');if(saved&&saved.access_token&&saved.refresh_token)session=saved;}catch(e){session=null;}return !!session;}
  function setSession(data){session={...data,expires_at:Number(data.expires_at)||Math.floor(Date.now()/1000)+Number(data.expires_in||3600)};store();}
  const config=window.CLASSE_CONFIG||{};
- /* Data di nascita in qualsiasi forma (14/03/2008, 14-3-08, 14032008, 140308) -> 140308; altrimenti null. */
- function dateCode(text){const t=String(text||'').trim();let d,m,y;if(/\D/.test(t)){const p=t.split(/\D+/).filter(Boolean);if(p.length!==3)return null;[d,m,y]=p;}else if(t.length===8||t.length===6){d=t.slice(0,2);m=t.slice(2,4);y=t.slice(4);}else return null;if(!/^\d{1,2}$/.test(d)||!/^\d{1,2}$/.test(m)||!/^(\d{2}|\d{4})$/.test(y)||+d<1||+d>31||+m<1||+m>12)return null;return d.padStart(2,'0')+m.padStart(2,'0')+y.slice(-2);}
+ /* Compleanno in qualsiasi forma (16/09, 16-9, 1609, 16/09/2008) -> 1609; altrimenti null. */
+ function dateCode(text){const t=String(text||'').trim();let d,m;if(/\D/.test(t)){const p=t.split(/\D+/).filter(Boolean);if(p.length<2||p.length>3)return null;[d,m]=p;}else if([4,6,8].includes(t.length)){d=t.slice(0,2);m=t.slice(2,4);}else return null;if(!/^\d{1,2}$/.test(d)||!/^\d{1,2}$/.test(m)||+d<1||+d>31||+m<1||+m>12)return null;return d.padStart(2,'0')+m.padStart(2,'0');}
  function configured(){return /^https:\/\/[a-z0-9-]+\.supabase\.co$/.test(config.supabaseUrl||'')&&/^sb_publishable_/.test(config.publishableKey||'');}
  async function call(path,body,token=null,keepalive=false){
   if(!configured())throw Error('Il salvataggio online non è ancora attivo. È necessario completare il collegamento dell’archivio.');
