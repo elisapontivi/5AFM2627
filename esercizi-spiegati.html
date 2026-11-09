@@ -37,7 +37,11 @@ main{padding:0 0 60px}
 .section-title p{margin:0;color:var(--muted);font-size:15px}
 
 /* lezioni */
-.lessons{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:-26px}
+.lessons{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.section-title.first{margin-top:34px}
+.feature + .feature{margin-top:22px}
+.badge.hard{background:#fde2e1;color:#a32121}
+.hardtxt{color:#a32121;font-weight:800}
 .lesson{background:white;border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 1px 2px rgba(16,47,67,.04),0 8px 24px rgba(16,47,67,.05);scroll-margin-top:80px}
 .player{position:relative;aspect-ratio:16/9;background:#e3ebf1}
 .player video,.player iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#e3ebf1}
@@ -105,7 +109,7 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding-top:18px;display
 <div class="top"><div class="wrap">
   <a class="brand" href="index.html">5AFM2627</a>
   <nav aria-label="Sezioni">
-    <a href="#lezioni">Lezioni</a><a href="#alfa">Prova d'esame</a><a href="#stampa">Da stampare</a><a href="https://elisapontivi.github.io/valutazioni-5afm-2627/">Le mie verifiche</a><a href="index.html">← Materiale</a>
+    <a href="#sigma">Sigma 9/11</a><a href="#lezioni">Lezioni</a><a href="#alfa">Prova d'esame</a><a href="#stampa">Da stampare</a><a href="https://elisapontivi.github.io/valutazioni-5afm-2627/">Le mie verifiche</a><a href="index.html">← Materiale</a>
   </nav>
 </div></div>
 
@@ -123,6 +127,35 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding-top:18px;display
 
 <main class="wrap">
 
+<div class="section-title first" id="sigma"><h2>Soluzione Sigma spa · 9/11</h2><p>Prova di economia aziendale · prima parte svolta passo per passo</p></div>
+<article class="feature" id="sigma-sistema">
+  <div class="player"><div class="inner" data-video="sigma_sistema"></div></div>
+  <div class="chap">
+    <div class="meta"><span class="badge hard">DIFFICILE!</span><span class="time"><svg width="14" height="14"><use href="#i-clock"/></svg>31 min</span></div>
+    <h3>Soluzione Sigma spa 9/11 <span class="hardtxt">(con risoluzione del sistema per i costi del personale: DIFFICILE!)</span></h3>
+    <p class="d">Scegli il capitolo:</p>
+    <ol data-for="sigma_sistema"></ol>
+    <div class="files">
+      <a class="file main" href="Prova_Economia_aziendale_Sigma_spa.pdf" target="_blank" rel="noopener"><svg><use href="#i-exam"/></svg>La traccia</a>
+      <a class="file alt" href="Sigma_spa_costi_del_personale.pdf" target="_blank" rel="noopener"><svg><use href="#i-doc"/></svg>Scheda costi del personale</a>
+    </div>
+  </div>
+</article>
+<article class="feature" id="sigma-semplice">
+  <div class="player"><div class="inner" data-video="sigma"></div></div>
+  <div class="chap">
+    <div class="meta"><span class="badge">Risoluzione più semplice</span><span class="time"><svg width="14" height="14"><use href="#i-clock"/></svg>26 min</span></div>
+    <h3>Soluzione Sigma spa 9/11 · risoluzione più semplice</h3>
+    <p class="d">Costi del personale con il metodo visto in classe (debito TFR 2024 ipotizzato a 550.000). Scegli il capitolo:</p>
+    <ol data-for="sigma"></ol>
+    <div class="files">
+      <a class="file main" href="Prova_Economia_aziendale_Sigma_spa.pdf" target="_blank" rel="noopener"><svg><use href="#i-exam"/></svg>La traccia</a>
+      <a class="file alt" href="Riepilogo_costi_del_personale.pdf" target="_blank" rel="noopener"><svg><use href="#i-doc"/></svg>Riepilogo costi del personale</a>
+    </div>
+  </div>
+</article>
+
+<div class="section-title" id="lezioni-titolo"><h2>Video-lezioni</h2><p>Un argomento alla volta, con la scheda di studio</p></div>
 <section id="lezioni" aria-label="Lezioni" class="lessons">
 
   <article class="lesson" id="personale">
@@ -228,6 +261,8 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding-top:18px;display
 /* VIDEO: se "youtube" contiene l'ID di un video YouTube si usa quello, altrimenti il file mp4 del repository. */
 const VIDEO = {
   personale:        { youtube: "", mp4: "video_lezione_1_personale_e_TFR.mp4",                  poster: "poster_lezione_1_personale_e_TFR.jpg" },
+  sigma_sistema:    { youtube: "", mp4: "video_Sigma_spa_soluzione_sistema.mp4",              poster: "poster_Sigma_spa_sistema.jpg" },
+  sigma:            { youtube: "", mp4: "video_Sigma_spa_soluzione_semplice.mp4",              poster: "poster_Sigma_spa_semplice.jpg" },
   riepilogo:        { youtube: "", mp4: "video_riepilogo_costi_personale.mp4",                  poster: "poster_riepilogo_costi_personale.jpg" },
   pagamento:        { youtube: "", mp4: "video_lezione_2_aumento_a_pagamento.mp4",              poster: "poster_lezione_2_aumento_a_pagamento.jpg" },
   immobilizzazioni: { youtube: "", mp4: "video_lezione_3_vendita_e_acquisto_immobilizzazioni.mp4", poster: "poster_lezione_3_vendita_e_acquisto_immobilizzazioni.jpg" },
@@ -235,7 +270,30 @@ const VIDEO = {
   alfa:             { youtube: "", mp4: "video_Alfa_spa_esame_2018.mp4",                       poster: "poster_Alfa_spa_esame_2018.jpg" },
 };
 /* capitoli del video di Alfa spa (secondi dall'inizio) */
-const CHAPTERS = { alfa: [
+const CHAPTERS = {
+sigma_sistema: [
+  [0, "Dati del testo e obiettivi"],
+  [121, "Conto economico 2025"],
+  [210, "Immobilizzazioni 2025"],
+  [347, "Costi del personale 2025"],
+  [877, "Stato patrimoniale 2025"],
+  [947, "Vendite, riparto dell'utile, aumenti di capitale"],
+  [1257, "Vendita e acquisto degli impianti"],
+  [1416, "Personale e TFR 2026"],
+  [1558, "Costi, banca, imposte e bilancio 2026"]
+],
+sigma: [
+  [0, "Dati del testo e obiettivi"],
+  [121, "Conto economico 2025"],
+  [210, "Immobilizzazioni 2025"],
+  [347, "Costi del personale 2025"],
+  [583, "Stato patrimoniale 2025"],
+  [652, "Vendite, riparto dell'utile, aumenti di capitale"],
+  [963, "Vendita e acquisto degli impianti"],
+  [1121, "Personale e TFR 2026"],
+  [1264, "Costi, banca, imposte e bilancio 2026"]
+],
+alfa: [
   [0,    "Dati del testo e conto economico 2016"],
   [209,  "Ammortamenti, personale e TFR 2016"],
   [431,  "Stato patrimoniale 2016"],
@@ -291,7 +349,7 @@ const Track = (() => {
 
 const mmss = s => Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0");
 
-const DUR = { riepilogo: "6:09", personale: "6:14", pagamento: "5:20", immobilizzazioni: "4:43", gratuito: "4:40", alfa: "34:50" };
+const DUR = { sigma_sistema: "31:07", sigma: "26:12", riepilogo: "6:13", personale: "6:14", pagamento: "5:20", immobilizzazioni: "4:43", gratuito: "4:40", alfa: "34:50" };
 
 function cover(box, key) {
   const v = VIDEO[key] || {};

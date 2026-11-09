@@ -5,8 +5,9 @@ const Cloud = (() => {
  function keep(){remember=true;try{const saved=JSON.parse(sessionStorage.getItem(KEY)||'null');if(saved&&saved.access_token&&saved.refresh_token)session=saved;}catch(e){session=null;}return !!session;}
  function setSession(data){session={...data,expires_at:Number(data.expires_at)||Math.floor(Date.now()/1000)+Number(data.expires_in||3600)};store();}
  const config=window.CLASSE_CONFIG||{};
- /* Compleanno in qualsiasi forma (16/09, 16-9, 1609, 16/09/2008) -> 1609; altrimenti null. */
- function dateCode(text){const t=String(text||'').trim();let d,m;if(/\D/.test(t)){const p=t.split(/\D+/).filter(Boolean);if(p.length<2||p.length>3)return null;[d,m]=p;}else if([4,6,8].includes(t.length)){d=t.slice(0,2);m=t.slice(2,4);}else return null;if(!/^\d{1,2}$/.test(d)||!/^\d{1,2}$/.test(m)||+d<1||+d>31||+m<1||+m>12)return null;return d.padStart(2,'0')+m.padStart(2,'0');}
+ /* Compleanno in qualsiasi forma (16/09, 16-9, 16 09, 1609, 169, 16/09/2008) -> codici ggmm possibili. */
+ function dateCodes(text){const t=String(text||'').trim(),ok=(d,m)=>/^\d{1,2}$/.test(d)&&/^\d{1,2}$/.test(m)&&+d>=1&&+d<=31&&+m>=1&&+m<=12,c=(d,m)=>d.padStart(2,'0')+m.padStart(2,'0'),out=[];if(/\D/.test(t)){const p=t.split(/\D+/).filter(Boolean);if(p.length>=2&&p.length<=3&&ok(p[0],p[1]))out.push(c(p[0],p[1]));}else if([4,6,8].includes(t.length)){if(ok(t.slice(0,2),t.slice(2,4)))out.push(t.slice(0,4));}else if(t.length===3){if(ok(t.slice(0,2),t.slice(2)))out.push(c(t.slice(0,2),t.slice(2)));if(ok(t.slice(0,1),t.slice(1)))out.push(c(t.slice(0,1),t.slice(1)));}else if(t.length===2&&ok(t[0],t[1]))out.push(c(t[0],t[1]));return [...new Set(out)];}
+ function dateCode(text){return dateCodes(text)[0]||null;}
  function configured(){return /^https:\/\/[a-z0-9-]+\.supabase\.co$/.test(config.supabaseUrl||'')&&/^sb_publishable_/.test(config.publishableKey||'');}
  async function call(path,body,token=null,keepalive=false){
   if(!configured())throw Error('Il salvataggio online non è ancora attivo. È necessario completare il collegamento dell’archivio.');
@@ -26,9 +27,9 @@ const Cloud = (() => {
  }
  async function login(target,password,email){
   const address=target==='teacher'?email:'studente'+String(target).padStart(2,'0')+'@'+config.studentDomain;
-  setSession(await call('/auth/v1/token?grant_type=password',{email:address,password:target==='teacher'?password:'Classe!'+(dateCode(password)||String(password).trim())}));
+  const tries=target==='teacher'?[password]:(dateCodes(password).length?dateCodes(password):[String(password).trim()]).map(x=>'Classe!'+x);let err=null;for(const pw of tries){try{setSession(await call('/auth/v1/token?grant_type=password',{email:address,password:pw}));err=null;break;}catch(e){err=e;if(/Connessione|Troppi|non è ancora attivo/.test(e.message))break;}}if(err)throw err;
   try{const profile=await rpc('ci_me');if(profile.role!==(target==='teacher'?'teacher':'student'))throw Error('Questo accesso non corrisponde al profilo scelto.');const records=await rpc('ci_records');return {profile,records};}catch(e){session=null;store();throw e;}
  }
  async function logout(){const token=session?.access_token;session=null;store();if(token)try{await call('/auth/v1/logout',{},token);}catch(e){/* Session remains removed locally; access token expires on the server. */}}
- return {configured,dateCode,login,logout,keep,forget:()=>{session=null;store();},me:()=>rpc('ci_me'),video:(args,keepalive=false)=>rpc('ci_video_event',args,keepalive),videoReport:()=>rpc('ci_video_report'),videoDetail:(student,video)=>rpc('ci_video_detail',{p_student:student,p_video:video}),videoReset:()=>rpc('ci_video_reset'),resetScores:()=>rpc('ci_reset_scores'),records:()=>rpc('ci_records'),start:(activity,request)=>rpc('ci_start',{p_activity:activity,p_request:request}),answer:(id,index,choice)=>rpc('ci_answer',{p_attempt:id,p_index:index,p_choice:choice}),accounting:(id,answers)=>rpc('ci_submit_accounting',{p_attempt:id,p_answers:answers})};
+ return {configured,dateCode,dateCodes,login,logout,keep,forget:()=>{session=null;store();},me:()=>rpc('ci_me'),video:(args,keepalive=false)=>rpc('ci_video_event',args,keepalive),videoReport:()=>rpc('ci_video_report'),videoDetail:(student,video)=>rpc('ci_video_detail',{p_student:student,p_video:video}),videoReset:()=>rpc('ci_video_reset'),resetScores:()=>rpc('ci_reset_scores'),records:()=>rpc('ci_records'),start:(activity,request)=>rpc('ci_start',{p_activity:activity,p_request:request}),answer:(id,index,choice)=>rpc('ci_answer',{p_attempt:id,p_index:index,p_choice:choice}),accounting:(id,answers)=>rpc('ci_submit_accounting',{p_attempt:id,p_answers:answers})};
 })();
