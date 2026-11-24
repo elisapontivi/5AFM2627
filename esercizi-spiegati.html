@@ -118,7 +118,7 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding-top:18px;display
   <h1>Esercizi spiegati</h1>
   <p>Guarda la video-lezione, studia sulla scheda e poi prova da solo gli esercizi: le soluzioni sono in fondo a ogni scheda.</p>
   <div class="stats">
-    <div class="stat"><b>5</b><span>video-lezioni</span></div>
+    <div class="stat"><b>6</b><span>video-lezioni</span></div>
     <div class="stat"><b>1</b><span>prova d'esame svolta</span></div>
     <div class="stat"><b>5</b><span>schede con esercizi</span></div>
     <div class="stat"><b>2</b><span>prospetti da stampare</span></div>
@@ -171,6 +171,16 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding-top:18px;display
 </article>
 
 <div class="section-title" id="lezioni-titolo"><h2>Video-lezioni</h2><p>Un argomento alla volta, con la scheda di studio</p></div>
+<article class="feature" id="manutenzione" style="margin-bottom:22px">
+  <div class="player"><div class="inner" data-video="manutenzione"></div></div>
+  <div class="chap">
+    <div class="meta"><span class="badge">Lezione 5</span><span class="time"><svg width="14" height="14"><use href="#i-clock"/></svg>11 min</span></div>
+    <h3>Manutenzione ordinaria e straordinaria</h3>
+    <p class="d">Che cosa le distingue, le scritture, il nuovo ammortamento dopo la manutenzione straordinaria e gli effetti sul bilancio, con l'esempio di Alfa spa. Scegli il capitolo:</p>
+    <ol data-for="manutenzione"></ol>
+  </div>
+</article>
+
 <section id="lezioni" aria-label="Lezioni" class="lessons">
 
   <article class="lesson" id="personale">
@@ -277,6 +287,7 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding-top:18px;display
 const VIDEO = {
   personale:        { youtube: "", mp4: "video_lezione_1_personale_e_TFR.mp4",                  poster: "poster_lezione_1_personale_e_TFR.jpg" },
   epsilon:          { youtube: "", mp4: "video_Epsilon_spa_soluzione_semplificata.mp4",        poster: "poster_Epsilon_spa_semplificata.jpg" },
+  manutenzione:     { youtube: "", mp4: "video_lezione_5_manutenzione_ordinaria_straordinaria.mp4", poster: "poster_lezione_5_manutenzione.jpg" },
   sigma_sistema:    { youtube: "", mp4: "video_Sigma_spa_soluzione_sistema.mp4",              poster: "poster_Sigma_spa_sistema.jpg" },
   sigma:            { youtube: "", mp4: "video_Sigma_spa_soluzione_semplice.mp4",              poster: "poster_Sigma_spa_semplice.jpg" },
   riepilogo:        { youtube: "", mp4: "video_riepilogo_costi_personale.mp4",                  poster: "poster_riepilogo_costi_personale.jpg" },
@@ -287,6 +298,17 @@ const VIDEO = {
 };
 /* capitoli del video di Alfa spa (secondi dall'inizio) */
 const CHAPTERS = {
+manutenzione: [
+  [0,   "Ordinaria e straordinaria: che cosa sono"],
+  [116, "Il confronto"],
+  [154, "Il metodo per la manutenzione straordinaria"],
+  [194, "Alfa spa: l'impianto"],
+  [248, "Situazione 1: la fattura della manutenzione straordinaria"],
+  [304, "Il nuovo ammortamento e il valore a bilancio"],
+  [518, "Situazione 2: la manutenzione ordinaria"],
+  [576, "Gli effetti sul bilancio"],
+  [616, "In sintesi"]
+],
 epsilon: [
   [0,    "I dati: che cosa ci dice e che cosa ci chiede il testo"],
   [112,  "Patrimonio netto, destinazione dell'utile e dividendi"],
@@ -376,7 +398,7 @@ const Track = (() => {
 
 const mmss = s => Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0");
 
-const DUR = { epsilon: "23:50", sigma_sistema: "31:07", sigma: "26:12", riepilogo: "6:13", personale: "6:14", pagamento: "5:20", immobilizzazioni: "4:43", gratuito: "4:40", alfa: "34:50" };
+const DUR = { manutenzione: "10:59", epsilon: "23:50", sigma_sistema: "31:07", sigma: "26:12", riepilogo: "6:13", personale: "6:14", pagamento: "5:20", immobilizzazioni: "4:43", gratuito: "4:40", alfa: "34:50" };
 
 function cover(box, key) {
   const v = VIDEO[key] || {};
