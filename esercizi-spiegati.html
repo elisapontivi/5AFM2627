@@ -118,7 +118,7 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding-top:18px;display
   <h1>Esercizi spiegati</h1>
   <p>Guarda la video-lezione, studia sulla scheda e poi prova da solo gli esercizi: le soluzioni sono in fondo a ogni scheda.</p>
   <div class="stats">
-    <div class="stat"><b>6</b><span>video-lezioni</span></div>
+    <div class="stat"><b>7</b><span>video-lezioni</span></div>
     <div class="stat"><b>1</b><span>prova d'esame svolta</span></div>
     <div class="stat"><b>5</b><span>schede con esercizi</span></div>
     <div class="stat"><b>2</b><span>prospetti da stampare</span></div>
@@ -171,6 +171,16 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding-top:18px;display
 </article>
 
 <div class="section-title" id="lezioni-titolo"><h2>Video-lezioni</h2><p>Un argomento alla volta, con la scheda di studio</p></div>
+<article class="feature" id="rimanenze" style="margin-bottom:22px">
+  <div class="player"><div class="inner" data-video="rimanenze"></div></div>
+  <div class="chap">
+    <div class="meta"><span class="badge">Lezione 6</span><span class="time"><svg width="14" height="14"><use href="#i-clock"/></svg>10 min</span></div>
+    <h3>Le rimanenze di materie prime e prodotti finiti</h3>
+    <p class="d">Giacenze e rimanenze, le scritture di fine e inizio anno, la regola dei segni (A2 e B11) e il bilancio 2025 e 2026 a confronto, con l'esempio di Beta spa. Scegli il capitolo:</p>
+    <ol data-for="rimanenze"></ol>
+  </div>
+</article>
+
 <article class="feature" id="manutenzione" style="margin-bottom:22px">
   <div class="player"><div class="inner" data-video="manutenzione"></div></div>
   <div class="chap">
@@ -287,6 +297,7 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding-top:18px;display
 const VIDEO = {
   personale:        { youtube: "", mp4: "video_lezione_1_personale_e_TFR.mp4",                  poster: "poster_lezione_1_personale_e_TFR.jpg" },
   epsilon:          { youtube: "", mp4: "video_Epsilon_spa_soluzione_semplificata.mp4",        poster: "poster_Epsilon_spa_semplificata.jpg" },
+  rimanenze:        { youtube: "", mp4: "video_lezione_6_rimanenze_Beta_spa.mp4", poster: "poster_lezione_6_rimanenze.jpg" },
   manutenzione:     { youtube: "", mp4: "video_lezione_5_manutenzione_ordinaria_straordinaria.mp4", poster: "poster_lezione_5_manutenzione.jpg" },
   sigma_sistema:    { youtube: "", mp4: "video_Sigma_spa_soluzione_sistema.mp4",              poster: "poster_Sigma_spa_sistema.jpg" },
   sigma:            { youtube: "", mp4: "video_Sigma_spa_soluzione_semplice.mp4",              poster: "poster_Sigma_spa_semplice.jpg" },
@@ -298,6 +309,18 @@ const VIDEO = {
 };
 /* capitoli del video di Alfa spa (secondi dall'inizio) */
 const CHAPTERS = {
+rimanenze: [
+  [0,   "Giacenze e rimanenze"],
+  [100, "Beta spa: i dati"],
+  [146, "Le scritture del 31/12/2025 e dell'1/1/2026"],
+  [248, "A fine 2026: iniziali e finali a confronto"],
+  [300, "La regola dei segni"],
+  [354, "Le variazioni del 2026 e il controllo"],
+  [424, "Le variazioni del 2025"],
+  [452, "Il conto economico 2025 e 2026"],
+  [514, "Lo stato patrimoniale 2025 e 2026"],
+  [578, "In sintesi"]
+],
 manutenzione: [
   [0,   "Ordinaria e straordinaria: che cosa sono"],
   [116, "Il confronto"],
@@ -398,7 +421,7 @@ const Track = (() => {
 
 const mmss = s => Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0");
 
-const DUR = { manutenzione: "10:59", epsilon: "23:50", sigma_sistema: "31:07", sigma: "26:12", riepilogo: "6:13", personale: "6:14", pagamento: "5:20", immobilizzazioni: "4:43", gratuito: "4:40", alfa: "34:50" };
+const DUR = { rimanenze: "10:27", manutenzione: "10:59", epsilon: "23:50", sigma_sistema: "31:07", sigma: "26:12", riepilogo: "6:13", personale: "6:14", pagamento: "5:20", immobilizzazioni: "4:43", gratuito: "4:40", alfa: "34:50" };
 
 function cover(box, key) {
   const v = VIDEO[key] || {};
