@@ -66,6 +66,9 @@ main{padding:0 0 60px}
 
 /* schede video */
 .lessons{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.lessons.three{grid-template-columns:repeat(3,1fr)}
+.lessons.three .lesson h3{font-size:19px}
+@media(max-width:1000px){.lessons.three{grid-template-columns:1fr 1fr}}
 .badge.hard{background:#fde2e1;color:#a32121}
 .hardtxt{color:#a32121;font-weight:800}
 .lesson{background:white;border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 1px 2px rgba(16,47,67,.04),0 8px 24px rgba(16,47,67,.05);scroll-margin-top:80px}
@@ -142,7 +145,7 @@ details.caps ol.chapters{margin:0 0 8px}
 footer{border-top:1px solid var(--line);margin-top:40px;padding-top:18px;display:flex;justify-content:space-between;gap:16px;color:var(--muted);font-size:14px}
 
 @media(max-width:900px){.feature{grid-template-columns:1fr}.chap{border-left:0;border-top:1px solid var(--line)}.exam-top{flex-direction:column}.exam-top .files{max-width:none;justify-content:flex-start}}
-@media(max-width:760px){.wrap{padding:0 16px}.doors,.lessons,.print{grid-template-columns:1fr}.top nav{display:none}.section-title{flex-direction:column;align-items:flex-start;gap:4px}footer{flex-direction:column}.part-head{flex-direction:column;align-items:flex-start;gap:8px}.part-head h2{font-size:26px}.exam-top,.tabs{padding-left:18px;padding-right:18px}}
+@media(max-width:760px){.wrap{padding:0 16px}.doors,.lessons,.lessons.three,.print{grid-template-columns:1fr}.top nav{display:none}.section-title{flex-direction:column;align-items:flex-start;gap:4px}footer{flex-direction:column}.part-head{flex-direction:column;align-items:flex-start;gap:8px}.part-head h2{font-size:26px}.exam-top,.tabs{padding-left:18px;padding-right:18px}}
 </style>
 <script src="config.js"></script>
 <script src="cloud.js"></script>
@@ -172,7 +175,7 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding-top:18px;display
   <div class="doors">
     <a class="door" href="#lezioni">
       <span class="num"><svg><use href="#i-book"/></svg></span>
-      <span><b>Lezioni per argomento</b><span class="s">7 video brevi (5–11 min) divisi in 4 argomenti, nell'ordine del programma, con le schede di studio.</span><span class="go">Vai alle lezioni ↓</span></span>
+      <span><b>Lezioni per argomento</b><span class="s">8 video brevi (5–11 min) divisi in 4 argomenti, nell'ordine del programma, con le schede di studio.</span><span class="go">Vai alle lezioni ↓</span></span>
     </a>
     <a class="door exam" href="#prove">
       <span class="num"><svg><use href="#i-exam"/></svg></span>
@@ -190,7 +193,7 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding-top:18px;display
   <ul class="toc" aria-label="Argomenti">
     <li><a href="#arg-personale"><i>1</i>Costi del personale e TFR</a></li>
     <li><a href="#arg-capitale"><i>2</i>Aumenti di capitale</a></li>
-    <li><a href="#arg-immobilizzazioni"><i>3</i>Immobilizzazioni e manutenzione</a></li>
+    <li><a href="#arg-immobilizzazioni"><i>3</i>Immobilizzazioni: vendita, manutenzione, svalutazione</a></li>
     <li><a href="#arg-rimanenze"><i>4</i>Rimanenze</a></li>
   </ul>
 
@@ -268,8 +271,8 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding-top:18px;display
 
   <!-- 3 · IMMOBILIZZAZIONI -->
   <div class="topic" id="arg-immobilizzazioni">
-    <div class="topic-head"><span class="n">3</span><div><h3>Immobilizzazioni e manutenzione</h3><p>Vendita e acquisto dei beni, plusvalenze e minusvalenze, manutenzione ordinaria e straordinaria.</p></div></div>
-    <div class="lessons">
+    <div class="topic-head"><span class="n">3</span><div><h3>Immobilizzazioni: vendita, manutenzione, svalutazione</h3><p>Vendita e acquisto dei beni, plusvalenze e minusvalenze, manutenzione ordinaria e straordinaria, svalutazione e nuovo ammortamento.</p></div></div>
+    <div class="lessons three">
       <article class="lesson" id="immobilizzazioni">
         <div class="player" data-video="immobilizzazioni"></div>
         <div class="body">
@@ -288,6 +291,15 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding-top:18px;display
           <h3>Manutenzione ordinaria e straordinaria</h3>
           <p class="d">Che cosa le distingue, le scritture, il nuovo ammortamento dopo la manutenzione straordinaria e gli effetti sul bilancio, con l'esempio di Alfa spa.</p>
           <details class="caps"><summary>Capitoli del video</summary><ol class="chapters" data-for="manutenzione"></ol></details>
+        </div>
+      </article>
+      <article class="lesson" id="svalutazione">
+        <div class="player" data-video="svalutazione"></div>
+        <div class="body">
+          <div class="meta"><span class="badge">Lezione 7</span><span class="time"><svg width="14" height="14"><use href="#i-clock"/></svg>7 min</span></div>
+          <h3>La svalutazione delle immobilizzazioni</h3>
+          <p class="d">Valore netto contabile e valore recuperabile, la scrittura della svalutazione, il nuovo ammortamento e gli effetti sul bilancio, con l'esempio dell'impianto di Alfa spa.</p>
+          <details class="caps"><summary>Capitoli del video</summary><ol class="chapters" data-for="svalutazione"></ol></details>
         </div>
       </article>
     </div>
@@ -414,6 +426,7 @@ const VIDEO = {
   personale:        { youtube: "", mp4: "video_lezione_1_personale_e_TFR.mp4",                  poster: "poster_lezione_1_personale_e_TFR.jpg" },
   epsilon:          { youtube: "", mp4: "video_Epsilon_spa_soluzione_semplificata.mp4",        poster: "poster_Epsilon_spa_semplificata.jpg" },
   rimanenze:        { youtube: "", mp4: "video_lezione_6_rimanenze_Beta_spa.mp4", poster: "poster_lezione_6_rimanenze.jpg" },
+  svalutazione:     { youtube: "", mp4: "video_lezione_7_svalutazione_immobilizzazioni.mp4", poster: "poster_lezione_7_svalutazione.jpg" },
   manutenzione:     { youtube: "", mp4: "video_lezione_5_manutenzione_ordinaria_straordinaria.mp4", poster: "poster_lezione_5_manutenzione.jpg" },
   sigma_sistema:    { youtube: "", mp4: "video_Sigma_spa_soluzione_sistema.mp4",              poster: "poster_Sigma_spa_sistema.jpg" },
   sigma:            { youtube: "", mp4: "video_Sigma_spa_soluzione_semplice.mp4",              poster: "poster_Sigma_spa_semplice.jpg" },
@@ -425,6 +438,19 @@ const VIDEO = {
 };
 /* capitoli dei video (secondi dall'inizio) */
 const CHAPTERS = {
+svalutazione: [
+  [0,   "Il valore netto contabile"],
+  [74,  "Il valore recuperabile"],
+  [112, "Alfa spa: il testo dell'esercizio"],
+  [154, "Le scritture del 31/12/T: ammortamento e svalutazione"],
+  [192, "Il nuovo valore netto contabile"],
+  [242, "Perché dividiamo per 2: il nuovo ammortamento"],
+  [284, "Le scritture di T+1 e T+2"],
+  [298, "Il piano di ammortamento prima e dopo"],
+  [344, "Gli effetti sul bilancio dell'anno T"],
+  [374, "Attenzione: l'ammortamento va ricalcolato"],
+  [386, "In sintesi"]
+],
 rimanenze: [
   [0,   "Giacenze e rimanenze"],
   [100, "Beta spa: i dati"],
@@ -537,7 +563,7 @@ const Track = (() => {
 
 const mmss = s => Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0");
 
-const DUR = { rimanenze: "10:27", manutenzione: "10:59", epsilon: "23:50", sigma_sistema: "31:07", sigma: "26:12", riepilogo: "6:13", personale: "6:14", pagamento: "5:20", immobilizzazioni: "4:43", gratuito: "4:40", alfa: "34:50" };
+const DUR = { svalutazione: "7:06", rimanenze: "10:27", manutenzione: "10:59", epsilon: "23:50", sigma_sistema: "31:07", sigma: "26:12", riepilogo: "6:13", personale: "6:14", pagamento: "5:20", immobilizzazioni: "4:43", gratuito: "4:40", alfa: "34:50" };
 
 function cover(box, key) {
   const v = VIDEO[key] || {};
