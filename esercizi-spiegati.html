@@ -4,14 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>5AFM2627 · Esercizi spiegati</title>
-<meta name="description" content="Video-lezioni, schede di studio e prospetti di bilancio da stampare per la classe 5AFM.">
+<meta name="description" content="Video-lezioni per argomento, prove complete svolte e prospetti di bilancio da stampare per la classe 5AFM.">
 <style>
-:root{--ink:#102f43;--muted:#526776;--line:#d7e2e8;--blue:#174e70;--green:#156950;--bg:#f4f7fa;--soft:#edf4fa;--mint:#bcebd9}
+:root{--ink:#102f43;--muted:#526776;--line:#d7e2e8;--blue:#174e70;--green:#156950;--bg:#f4f7fa;--soft:#edf4fa;--mint:#bcebd9;--amber:#8a5200;--amber-soft:#fdf1dc}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:72px}
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,Segoe UI,sans-serif}
-a{color:var(--blue)} a:focus-visible,button:focus-visible{outline:3px solid #df9517;outline-offset:3px}
+a{color:var(--blue)} a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #df9517;outline-offset:3px}
 .wrap{max-width:1100px;margin:auto;padding:0 28px}
+[hidden]{display:none!important}
 
 /* barra in alto */
 .top{background:var(--ink);color:white;position:sticky;top:0;z-index:5;box-shadow:0 1px 0 rgba(255,255,255,.08)}
@@ -21,36 +22,62 @@ a{color:var(--blue)} a:focus-visible,button:focus-visible{outline:3px solid #df9
 .top nav a{color:#d4e1ea;text-decoration:none;font-size:14px;font-weight:600;padding:7px 11px;border-radius:7px;white-space:nowrap}
 .top nav a:hover{background:rgba(255,255,255,.1);color:white}
 
-/* intestazione */
-.hero{background:var(--ink);color:white;padding:34px 0 46px}
+/* intestazione con le due porte */
+.hero{background:var(--ink);color:white;padding:34px 0 40px}
 .eyebrow{color:#9fc3dc;font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin:0 0 8px}
-.hero h1{font-size:clamp(34px,5vw,50px);line-height:1.1;letter-spacing:-.03em;margin:0 0 14px}
-.hero p{color:#d4e1ea;max-width:640px;margin:0 0 24px;font-size:17px}
-.stats{display:flex;gap:12px;flex-wrap:wrap}
-.stat{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:10px 16px}
-.stat b{display:block;font-size:22px;line-height:1.1}
-.stat span{font-size:13px;color:#b9cddc}
+.hero h1{font-size:clamp(34px,5vw,50px);line-height:1.1;letter-spacing:-.03em;margin:0 0 12px}
+.hero p.lead{color:#d4e1ea;max-width:680px;margin:0 0 24px;font-size:17px}
+.doors{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.door{display:flex;gap:16px;align-items:flex-start;text-decoration:none;color:white;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:16px;padding:20px 22px;transition:background .15s,border-color .15s}
+.door:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.3)}
+.door .num{flex:none;width:46px;height:46px;border-radius:12px;display:grid;place-items:center;background:var(--mint);color:var(--ink)}
+.door.exam .num{background:#ffd34d}
+.door .num svg{width:24px;height:24px}
+.door b{display:block;font-size:20px;line-height:1.25;margin-bottom:2px}
+.door span.s{display:block;color:#b9cddc;font-size:14.5px;line-height:1.45}
+.door .go{display:inline-block;margin-top:8px;font-weight:700;font-size:14px;color:var(--mint)}
+.door.exam .go{color:#ffd34d}
 
 main{padding:0 0 60px}
-.section-title{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:46px 0 16px}
-.section-title h2{font-size:26px;margin:0;letter-spacing:-.02em}
-.section-title p{margin:0;color:var(--muted);font-size:15px}
+.part{margin-top:44px}
+.part-head{display:flex;align-items:center;gap:14px;margin:0 0 6px}
+.part-head .tag{flex:none;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;border-radius:999px;padding:4px 12px;background:var(--mint);color:var(--ink)}
+.part-head .tag.exam{background:#ffd34d;color:#3b2a00}
+.part-head h2{font-size:30px;margin:0;letter-spacing:-.02em;line-height:1.15}
+.part > p.intro{color:var(--muted);margin:0 0 18px;max-width:760px}
 
-/* lezioni */
+/* indice degli argomenti */
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 8px;padding:0;list-style:none}
+.toc a{display:inline-flex;align-items:center;gap:8px;text-decoration:none;background:white;border:1px solid var(--line);border-radius:999px;padding:6px 14px 6px 6px;font-weight:650;font-size:14.5px;color:var(--ink)}
+.toc a:hover{border-color:var(--blue);color:var(--blue)}
+.toc a i{font-style:normal;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:var(--ink);color:white;font-size:12.5px;font-weight:800}
+
+/* un argomento */
+.topic{margin-top:30px;scroll-margin-top:80px}
+.topic-head{display:flex;align-items:flex-start;gap:14px;margin-bottom:14px}
+.topic-head .n{flex:none;width:38px;height:38px;border-radius:50%;background:var(--ink);color:white;display:grid;place-items:center;font-weight:800;font-size:17px;margin-top:2px}
+.topic-head h3{font-size:23px;margin:0;letter-spacing:-.01em;line-height:1.25}
+.topic-head p{margin:2px 0 0;color:var(--muted);font-size:15px}
+.also{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:14px 0 0;padding:12px 16px;background:white;border:1px dashed #b9cbd6;border-radius:12px;font-size:14.5px}
+.also > span{color:var(--muted);font-weight:650;margin-right:2px}
+.jump{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:6px;background:var(--amber-soft);color:var(--amber);border-radius:999px;padding:4px 11px;font-weight:650;font-size:14px}
+.jump:hover{filter:brightness(.96);text-decoration:underline}
+.jump b{font-variant-numeric:tabular-nums;font-weight:800}
+
+/* schede video */
 .lessons{display:grid;grid-template-columns:1fr 1fr;gap:22px}
-.section-title.first{margin-top:34px}
-.feature + .feature{margin-top:22px}
 .badge.hard{background:#fde2e1;color:#a32121}
 .hardtxt{color:#a32121;font-weight:800}
 .lesson{background:white;border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 1px 2px rgba(16,47,67,.04),0 8px 24px rgba(16,47,67,.05);scroll-margin-top:80px}
 .player{position:relative;aspect-ratio:16/9;background:#e3ebf1}
 .player video,.player iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#e3ebf1}
 .body{padding:20px 22px 22px;display:flex;flex-direction:column;flex:1}
-.meta{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.meta{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:6px}
 .badge{font-size:12px;text-transform:uppercase;letter-spacing:.09em;font-weight:750;color:var(--blue);background:var(--soft);border-radius:5px;padding:3px 8px}
+.badge.exam{color:var(--amber);background:var(--amber-soft)}
 .time{font-size:13px;color:var(--muted);display:inline-flex;align-items:center;gap:5px}
-.lesson h3{font-size:21px;line-height:1.25;margin:2px 0 8px}
-.lesson p.d{color:var(--muted);margin:0 0 14px;font-size:15px}
+.lesson h3,.chap h3{font-size:21px;line-height:1.25;margin:2px 0 8px}
+p.d{color:var(--muted);margin:0 0 14px;font-size:15px}
 .files{display:flex;flex-wrap:wrap;gap:10px;margin-top:auto}
 .file{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:9px;text-decoration:none;font-weight:650;font-size:15px;min-height:44px}
 .file svg{width:18px;height:18px;flex:none}
@@ -65,18 +92,41 @@ main{padding:0 0 60px}
 .cover:hover .play{transform:translate(-50%,-50%) scale(1.07)}
 .cover .dur{position:absolute;right:12px;bottom:10px;z-index:1;background:rgba(16,47,67,.85);color:white;font-size:13px;font-weight:650;padding:3px 8px;border-radius:6px}
 
-/* Alfa spa */
+/* capitoli */
+ol.chapters{list-style:none;margin:0 0 14px;padding:0}
+ol.chapters li button{all:unset;cursor:pointer;display:flex;gap:10px;width:100%;padding:6px 8px;border-radius:8px;font-size:14.5px;line-height:1.35;box-sizing:border-box}
+ol.chapters li button:hover{background:var(--soft)}
+ol.chapters li button.on{background:var(--soft);color:var(--blue);font-weight:650}
+ol.chapters li b{font-variant-numeric:tabular-nums;color:var(--green);min-width:42px}
+details.caps{margin:0 0 14px;border:1px solid var(--line);border-radius:10px;padding:0 10px}
+details.caps summary{cursor:pointer;font-weight:650;font-size:14.5px;color:var(--blue);padding:9px 0;list-style-position:inside}
+details.caps ol.chapters{margin:0 0 8px}
+
+/* video grande con capitoli a lato */
 .feature{background:white;border:1px solid var(--line);border-radius:18px;overflow:hidden;display:grid;grid-template-columns:1.55fr 1fr;box-shadow:0 1px 2px rgba(16,47,67,.04),0 8px 24px rgba(16,47,67,.05);scroll-margin-top:80px}
+.feature + .feature{margin-top:22px}
 .feature .player{aspect-ratio:auto;min-height:100%;background:var(--ink);display:flex;align-items:center}
 .feature .player .inner{position:relative;width:100%;aspect-ratio:16/9}
 .chap{padding:20px 22px;border-left:1px solid var(--line);display:flex;flex-direction:column}
-.chap h3{font-size:21px;margin:4px 0 4px}
-.chap p.d{color:var(--muted);font-size:15px;margin:0 0 10px}
-.chap ol{list-style:none;margin:0 0 14px;padding:0;counter-reset:c}
-.chap li button{all:unset;cursor:pointer;display:flex;gap:10px;width:100%;padding:6px 8px;border-radius:8px;font-size:14.5px;line-height:1.35;box-sizing:border-box}
-.chap li button:hover{background:var(--soft)}
-.chap li button.on{background:var(--soft);color:var(--blue);font-weight:650}
-.chap li b{font-variant-numeric:tabular-nums;color:var(--green);min-width:42px}
+.chap p.d{margin-bottom:10px}
+
+/* prove complete */
+.exam-card{background:white;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 1px 2px rgba(16,47,67,.04),0 8px 24px rgba(16,47,67,.05);scroll-margin-top:80px}
+.exam-card + .exam-card{margin-top:26px}
+.exam-top{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;padding:20px 24px 16px;border-bottom:1px solid var(--line)}
+.exam-top h3{margin:4px 0 2px;font-size:24px;letter-spacing:-.01em;line-height:1.2}
+.exam-top p{margin:0;color:var(--muted);font-size:15px}
+.exam-top .files{margin-top:0;flex:0 1 auto;max-width:380px;justify-content:flex-end}
+.inside{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:10px;font-size:14px}
+.inside > span{color:var(--muted);font-weight:650}
+.inside a{text-decoration:none;background:var(--soft);color:var(--blue);border-radius:999px;padding:2px 10px;font-weight:650}
+.inside a:hover{text-decoration:underline}
+.exam-card .feature{border:0;border-radius:0;box-shadow:none}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;padding:14px 24px 0}
+.tabs button{all:unset;cursor:pointer;font-weight:700;font-size:14.5px;padding:8px 14px;border-radius:9px;border:1.5px solid var(--line);color:var(--muted)}
+.tabs button[aria-selected="true"]{border-color:var(--blue);background:var(--soft);color:var(--blue)}
+.tabs button.hard[aria-selected="true"]{border-color:#a32121;background:#fde2e1;color:#a32121}
+.tabs + .feature{margin-top:14px;border-top:1px solid var(--line)}
 
 /* stampa */
 .print{display:grid;grid-template-columns:1fr 1fr;gap:22px}
@@ -85,13 +135,14 @@ main{padding:0 0 60px}
 .pcard .ico svg{width:26px;height:26px}
 .pcard h3{margin:0 0 4px;font-size:19px}
 .pcard p{margin:0 0 14px;color:var(--muted);font-size:15px}
+.section-title{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:50px 0 16px}
+.section-title h2{font-size:24px;margin:0;letter-spacing:-.02em}
+.section-title p{margin:0;color:var(--muted);font-size:15px}
 
-.tip{margin-top:26px;padding:20px 24px;border-radius:16px;background:var(--ink);color:#d4e1ea;border-left:6px solid #53b69a;font-size:15px}
-.tip b{color:white}
 footer{border-top:1px solid var(--line);margin-top:40px;padding-top:18px;display:flex;justify-content:space-between;gap:16px;color:var(--muted);font-size:14px}
 
-@media(max-width:900px){.feature{grid-template-columns:1fr}.chap{border-left:0;border-top:1px solid var(--line)}}
-@media(max-width:760px){.wrap{padding:0 18px}.lessons,.print{grid-template-columns:1fr}.top nav{display:none}.section-title{flex-direction:column;align-items:flex-start;gap:4px}footer{flex-direction:column}}
+@media(max-width:900px){.feature{grid-template-columns:1fr}.chap{border-left:0;border-top:1px solid var(--line)}.exam-top{flex-direction:column}.exam-top .files{max-width:none;justify-content:flex-start}}
+@media(max-width:760px){.wrap{padding:0 16px}.doors,.lessons,.print{grid-template-columns:1fr}.top nav{display:none}.section-title{flex-direction:column;align-items:flex-start;gap:4px}footer{flex-direction:column}.part-head{flex-direction:column;align-items:flex-start;gap:8px}.part-head h2{font-size:26px}.exam-top,.tabs{padding-left:18px;padding-right:18px}}
 </style>
 <script src="config.js"></script>
 <script src="cloud.js"></script>
@@ -104,173 +155,238 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding-top:18px;display
   <symbol id="i-print" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v8H6z"/></symbol>
   <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
   <symbol id="i-exam" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6l1 2h3v16H5V5h3z"/><path d="M9 12l2 2 4-4"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></symbol>
 </svg>
 
 <div class="top"><div class="wrap">
   <a class="brand" href="index.html">5AFM2627</a>
   <nav aria-label="Sezioni">
-    <a href="#epsilon">Epsilon spa</a><a href="#sigma">Sigma 9/11</a><a href="#lezioni">Lezioni</a><a href="#alfa">Prova d'esame</a><a href="#stampa">Da stampare</a><a href="https://elisapontivi.github.io/valutazioni-5afm-2627/">Le mie verifiche</a><a href="index.html">← Materiale</a>
+    <a href="#lezioni">Lezioni per argomento</a><a href="#prove">Prove svolte</a><a href="#stampa">Da stampare</a><a href="https://elisapontivi.github.io/valutazioni-5afm-2627/">Le mie verifiche</a><a href="index.html">← Materiale</a>
   </nav>
 </div></div>
 
 <header class="hero"><div class="wrap">
   <p class="eyebrow">Economia aziendale · A.S. 2026 / 2027</p>
   <h1>Esercizi spiegati</h1>
-  <p>Guarda la video-lezione, studia sulla scheda e poi prova da solo gli esercizi: le soluzioni sono in fondo a ogni scheda.</p>
-  <div class="stats">
-    <div class="stat"><b>7</b><span>video-lezioni</span></div>
-    <div class="stat"><b>1</b><span>prova d'esame svolta</span></div>
-    <div class="stat"><b>5</b><span>schede con esercizi</span></div>
-    <div class="stat"><b>2</b><span>prospetti da stampare</span></div>
+  <p class="lead">Prima studia un argomento alla volta con le video-lezioni, poi mettiti alla prova guardando una prova intera svolta passo per passo.</p>
+  <div class="doors">
+    <a class="door" href="#lezioni">
+      <span class="num"><svg><use href="#i-book"/></svg></span>
+      <span><b>Lezioni per argomento</b><span class="s">7 video brevi (5–11 min) divisi in 4 argomenti, nell'ordine del programma, con le schede di studio.</span><span class="go">Vai alle lezioni ↓</span></span>
+    </a>
+    <a class="door exam" href="#prove">
+      <span class="num"><svg><use href="#i-exam"/></svg></span>
+      <span><b>Prove complete svolte</b><span class="s">3 prove intere risolte dall'inizio alla fine (24–35 min), con la traccia e i capitoli per saltare al punto che ti serve.</span><span class="go">Vai alle prove ↓</span></span>
+    </a>
   </div>
 </div></header>
 
 <main class="wrap">
 
-<div class="section-title first" id="epsilon"><h2>Soluzione Epsilon spa</h2><p>Prova di economia aziendale · soluzione semplificata, come l'abbiamo fatta in classe</p></div>
-<article class="feature" id="epsilon-semplificata">
-  <div class="player"><div class="inner" data-video="epsilon"></div></div>
-  <div class="chap">
-    <div class="meta"><span class="badge">Soluzione semplificata</span><span class="time"><svg width="14" height="14"><use href="#i-clock"/></svg>24 min</span></div>
-    <h3>Soluzione Epsilon spa · bilancio 2025 e 2026</h3>
-    <p class="d">Patrimonio netto e utile, manutenzione straordinaria, rimanenze, costi del personale nel modo più semplice, IVA, crediti, debiti e banca. Scegli il capitolo:</p>
-    <ol data-for="epsilon"></ol>
-    <div class="files">
-      <a class="file main" href="Prova_Economia_aziendale_Epsilon_spa.pdf" target="_blank" rel="noopener"><svg><use href="#i-exam"/></svg>Il testo</a>
-      <a class="file alt" href="Soluzione_semplificata_Epsilon_spa.pdf" target="_blank" rel="noopener"><svg><use href="#i-doc"/></svg>La soluzione</a>
+<!-- ============ PARTE 1 · LEZIONI PER ARGOMENTO ============ -->
+<section class="part" id="lezioni" aria-labelledby="lezioni-h">
+  <div class="part-head"><span class="tag">Parte 1</span><h2 id="lezioni-h">Lezioni per argomento</h2></div>
+  <p class="intro">Un argomento alla volta, nell'ordine in cui li abbiamo fatti. Sotto ogni argomento trovi anche il punto esatto delle prove svolte in cui viene usato.</p>
+  <ul class="toc" aria-label="Argomenti">
+    <li><a href="#arg-personale"><i>1</i>Costi del personale e TFR</a></li>
+    <li><a href="#arg-capitale"><i>2</i>Aumenti di capitale</a></li>
+    <li><a href="#arg-immobilizzazioni"><i>3</i>Immobilizzazioni e manutenzione</a></li>
+    <li><a href="#arg-rimanenze"><i>4</i>Rimanenze</a></li>
+  </ul>
+
+  <!-- 1 · PERSONALE -->
+  <div class="topic" id="arg-personale">
+    <div class="topic-head"><span class="n">1</span><div><h3>Costi del personale e TFR</h3><p>Busta paga, scritture del mese, F24, TFR. E quali numeri usare nella prova: 2025 o 2026.</p></div></div>
+    <div class="lessons">
+      <article class="lesson" id="personale">
+        <div class="player" data-video="personale"></div>
+        <div class="body">
+          <div class="meta"><span class="badge">Lezione 1</span><span class="time"><svg width="14" height="14"><use href="#i-clock"/></svg>6 min</span></div>
+          <h3>Costi del personale e TFR</h3>
+          <p class="d">Dal lordo al netto in busta paga, le scritture del mese, l'F24 e il calcolo del TFR con X1, X2 e imposta sostitutiva.</p>
+          <div class="files">
+            <a class="file main" href="Scheda_1_costi_del_personale_e_TFR.pdf" target="_blank" rel="noopener"><svg><use href="#i-doc"/></svg>Scheda di studio</a>
+            <a class="file alt" href="appunti_costi_del_personale.pdf" target="_blank" rel="noopener"><svg><use href="#i-pen"/></svg>Appunti della prof</a>
+          </div>
+        </div>
+      </article>
+      <article class="lesson" id="riepilogo-personale">
+        <div class="player" data-video="riepilogo"></div>
+        <div class="body">
+          <div class="meta"><span class="badge">Riepilogo</span><span class="time"><svg width="14" height="14"><use href="#i-clock"/></svg>6 min</span></div>
+          <h3>Costi del personale: 2025 o 2026?</h3>
+          <p class="d">Quali numeri usare nella prova: i costi e il debito per TFR del 2025, i salari del 2026 per scritture, banca e TFR. Con l'indennità di malattia e il mastrino dei debiti verso istituti previdenziali.</p>
+          <div class="files">
+            <a class="file main" href="Riepilogo_costi_del_personale.pdf" target="_blank" rel="noopener"><svg><use href="#i-doc"/></svg>Scheda con esempio e scritture</a>
+          </div>
+        </div>
+      </article>
+    </div>
+    <div class="also"><span>Lo ritrovi nelle prove:</span>
+      <button class="jump" data-jump="epsilon:772">Epsilon spa <b>12:52</b></button>
+      <button class="jump" data-jump="sigma:347">Sigma spa <b>5:47</b></button>
+      <button class="jump" data-jump="alfa:209">Alfa spa 2016 <b>3:29</b></button>
+      <button class="jump" data-jump="alfa:863">Alfa spa 2017 <b>14:23</b></button>
     </div>
   </div>
-</article>
 
-<div class="section-title" id="sigma"><h2>Soluzione Sigma spa · 9/11</h2><p>Prova di economia aziendale · prima parte svolta passo per passo</p></div>
-<article class="feature" id="sigma-sistema">
-  <div class="player"><div class="inner" data-video="sigma_sistema"></div></div>
-  <div class="chap">
-    <div class="meta"><span class="badge hard">DIFFICILE!</span><span class="time"><svg width="14" height="14"><use href="#i-clock"/></svg>31 min</span></div>
-    <h3>Soluzione Sigma spa 9/11 <span class="hardtxt">(con risoluzione del sistema per i costi del personale: DIFFICILE!)</span></h3>
-    <p class="d">Scegli il capitolo:</p>
-    <ol data-for="sigma_sistema"></ol>
-    <div class="files">
-      <a class="file main" href="Prova_Economia_aziendale_Sigma_spa.pdf" target="_blank" rel="noopener"><svg><use href="#i-exam"/></svg>La traccia</a>
-      <a class="file alt" href="Sigma_spa_costi_del_personale.pdf" target="_blank" rel="noopener"><svg><use href="#i-doc"/></svg>Scheda costi del personale</a>
+  <!-- 2 · CAPITALE -->
+  <div class="topic" id="arg-capitale">
+    <div class="topic-head"><span class="n">2</span><div><h3>Aumenti di capitale</h3><p>A pagamento (nuove azioni, sovrapprezzo, notaio) e gratuito (le riserve diventano capitale).</p></div></div>
+    <div class="lessons">
+      <article class="lesson" id="aumento-pagamento">
+        <div class="player" data-video="pagamento"></div>
+        <div class="body">
+          <div class="meta"><span class="badge">Lezione 2</span><span class="time"><svg width="14" height="14"><use href="#i-clock"/></svg>5 min</span></div>
+          <h3>Aumento di capitale a pagamento</h3>
+          <p class="d">Nuove azioni e sovrapprezzo, sottoscrizione e versamento, la fattura del notaio con la ritenuta d'acconto.</p>
+          <div class="files">
+            <a class="file main" href="Scheda_2_aumento_di_capitale_a_pagamento.pdf" target="_blank" rel="noopener"><svg><use href="#i-doc"/></svg>Scheda di studio</a>
+            <a class="file alt" href="appunti_aumento_di_capitale.pdf" target="_blank" rel="noopener"><svg><use href="#i-pen"/></svg>Appunti della prof</a>
+          </div>
+        </div>
+      </article>
+      <article class="lesson" id="aumento-gratuito">
+        <div class="player" data-video="gratuito"></div>
+        <div class="body">
+          <div class="meta"><span class="badge">Lezione 4</span><span class="time"><svg width="14" height="14"><use href="#i-clock"/></svg>5 min</span></div>
+          <h3>Aumento di capitale gratuito</h3>
+          <p class="d">Le riserve diventano capitale sociale: il patrimonio netto non cambia. Con il confronto con l'aumento a pagamento.</p>
+          <div class="files">
+            <a class="file main" href="Scheda_4_aumento_di_capitale_gratuito.pdf" target="_blank" rel="noopener"><svg><use href="#i-doc"/></svg>Scheda di studio</a>
+            <a class="file alt" href="appunti_aumento_di_capitale.pdf" target="_blank" rel="noopener"><svg><use href="#i-pen"/></svg>Appunti della prof</a>
+          </div>
+        </div>
+      </article>
+    </div>
+    <div class="also"><span>Lo ritrovi nelle prove:</span>
+      <button class="jump" data-jump="epsilon:296">Epsilon spa <b>4:56</b></button>
+      <button class="jump" data-jump="sigma:652">Sigma spa <b>10:52</b></button>
+      <button class="jump" data-jump="alfa:1145">Alfa spa <b>19:05</b></button>
     </div>
   </div>
-</article>
-<article class="feature" id="sigma-semplice">
-  <div class="player"><div class="inner" data-video="sigma"></div></div>
-  <div class="chap">
-    <div class="meta"><span class="badge">Risoluzione più semplice</span><span class="time"><svg width="14" height="14"><use href="#i-clock"/></svg>26 min</span></div>
-    <h3>Soluzione Sigma spa 9/11 · risoluzione più semplice</h3>
-    <p class="d">Costi del personale con il metodo visto in classe (debito TFR 2024 ipotizzato a 550.000). Scegli il capitolo:</p>
-    <ol data-for="sigma"></ol>
-    <div class="files">
-      <a class="file main" href="Prova_Economia_aziendale_Sigma_spa.pdf" target="_blank" rel="noopener"><svg><use href="#i-exam"/></svg>La traccia</a>
-      <a class="file alt" href="Riepilogo_costi_del_personale.pdf" target="_blank" rel="noopener"><svg><use href="#i-doc"/></svg>Riepilogo costi del personale</a>
+
+  <!-- 3 · IMMOBILIZZAZIONI -->
+  <div class="topic" id="arg-immobilizzazioni">
+    <div class="topic-head"><span class="n">3</span><div><h3>Immobilizzazioni e manutenzione</h3><p>Vendita e acquisto dei beni, plusvalenze e minusvalenze, manutenzione ordinaria e straordinaria.</p></div></div>
+    <div class="lessons">
+      <article class="lesson" id="immobilizzazioni">
+        <div class="player" data-video="immobilizzazioni"></div>
+        <div class="body">
+          <div class="meta"><span class="badge">Lezione 3</span><span class="time"><svg width="14" height="14"><use href="#i-clock"/></svg>5 min</span></div>
+          <h3>Vendita e acquisto di immobilizzazioni</h3>
+          <p class="d">Ammortamento fino alla vendita, valore contabile netto, plusvalenze e minusvalenze, il bene nuovo e il suo primo ammortamento.</p>
+          <div class="files">
+            <a class="file main" href="Scheda_3_vendita_e_acquisto_immobilizzazioni.pdf" target="_blank" rel="noopener"><svg><use href="#i-doc"/></svg>Scheda di studio</a>
+          </div>
+        </div>
+      </article>
+      <article class="lesson" id="manutenzione">
+        <div class="player" data-video="manutenzione"></div>
+        <div class="body">
+          <div class="meta"><span class="badge">Lezione 5</span><span class="time"><svg width="14" height="14"><use href="#i-clock"/></svg>11 min</span></div>
+          <h3>Manutenzione ordinaria e straordinaria</h3>
+          <p class="d">Che cosa le distingue, le scritture, il nuovo ammortamento dopo la manutenzione straordinaria e gli effetti sul bilancio, con l'esempio di Alfa spa.</p>
+          <details class="caps"><summary>Capitoli del video</summary><ol class="chapters" data-for="manutenzione"></ol></details>
+        </div>
+      </article>
+    </div>
+    <div class="also"><span>Lo ritrovi nelle prove:</span>
+      <button class="jump" data-jump="epsilon:388">Epsilon spa <b>6:28</b></button>
+      <button class="jump" data-jump="sigma:963">Sigma spa <b>16:03</b></button>
+      <button class="jump" data-jump="alfa:1376">Alfa spa <b>22:56</b></button>
     </div>
   </div>
-</article>
 
-<div class="section-title" id="lezioni-titolo"><h2>Video-lezioni</h2><p>Un argomento alla volta, con la scheda di studio</p></div>
-<article class="feature" id="rimanenze" style="margin-bottom:22px">
-  <div class="player"><div class="inner" data-video="rimanenze"></div></div>
-  <div class="chap">
-    <div class="meta"><span class="badge">Lezione 6</span><span class="time"><svg width="14" height="14"><use href="#i-clock"/></svg>10 min</span></div>
-    <h3>Le rimanenze di materie prime e prodotti finiti</h3>
-    <p class="d">Giacenze e rimanenze, le scritture di fine e inizio anno, la regola dei segni (A2 e B11) e il bilancio 2025 e 2026 a confronto, con l'esempio di Beta spa. Scegli il capitolo:</p>
-    <ol data-for="rimanenze"></ol>
-  </div>
-</article>
-
-<article class="feature" id="manutenzione" style="margin-bottom:22px">
-  <div class="player"><div class="inner" data-video="manutenzione"></div></div>
-  <div class="chap">
-    <div class="meta"><span class="badge">Lezione 5</span><span class="time"><svg width="14" height="14"><use href="#i-clock"/></svg>11 min</span></div>
-    <h3>Manutenzione ordinaria e straordinaria</h3>
-    <p class="d">Che cosa le distingue, le scritture, il nuovo ammortamento dopo la manutenzione straordinaria e gli effetti sul bilancio, con l'esempio di Alfa spa. Scegli il capitolo:</p>
-    <ol data-for="manutenzione"></ol>
-  </div>
-</article>
-
-<section id="lezioni" aria-label="Lezioni" class="lessons">
-
-  <article class="lesson" id="personale">
-    <div class="player" data-video="personale"></div>
-    <div class="body">
-      <div class="meta"><span class="badge">Lezione 1</span><span class="time"><svg width="14" height="14"><use href="#i-clock"/></svg>6 min</span></div>
-      <h3>Costi del personale e TFR</h3>
-      <p class="d">Dal lordo al netto in busta paga, le scritture del mese, l'F24 e il calcolo del TFR con X1, X2 e imposta sostitutiva.</p>
-      <div class="files">
-        <a class="file main" href="Scheda_1_costi_del_personale_e_TFR.pdf" target="_blank" rel="noopener"><svg><use href="#i-doc"/></svg>Scheda di studio</a>
-        <a class="file alt" href="appunti_costi_del_personale.pdf" target="_blank" rel="noopener"><svg><use href="#i-pen"/></svg>Appunti della prof</a>
+  <!-- 4 · RIMANENZE -->
+  <div class="topic" id="arg-rimanenze">
+    <div class="topic-head"><span class="n">4</span><div><h3>Rimanenze</h3><p>Materie prime e prodotti finiti: scritture di fine e inizio anno, variazioni e bilancio.</p></div></div>
+    <article class="feature" id="rimanenze">
+      <div class="player"><div class="inner" data-video="rimanenze"></div></div>
+      <div class="chap">
+        <div class="meta"><span class="badge">Lezione 6</span><span class="time"><svg width="14" height="14"><use href="#i-clock"/></svg>10 min</span></div>
+        <h3>Le rimanenze di materie prime e prodotti finiti</h3>
+        <p class="d">Giacenze e rimanenze, le scritture di fine e inizio anno, la regola dei segni (A2 e B11) e il bilancio 2025 e 2026 a confronto, con l'esempio di Beta spa. Scegli il capitolo:</p>
+        <ol class="chapters" data-for="rimanenze"></ol>
       </div>
+    </article>
+    <div class="also"><span>Lo ritrovi nelle prove:</span>
+      <button class="jump" data-jump="epsilon:636">Epsilon spa <b>10:36</b></button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PARTE 2 · PROVE COMPLETE SVOLTE ============ -->
+<section class="part" id="prove" aria-labelledby="prove-h">
+  <div class="part-head"><span class="tag exam">Parte 2</span><h2 id="prove-h">Prove complete svolte</h2></div>
+  <p class="intro">Tracce intere risolte dall'inizio alla fine, come all'esame. Prova prima da solo sulla traccia, poi guarda la soluzione: con i capitoli salti subito al punto che ti serve.</p>
+
+  <article class="exam-card" id="epsilon">
+    <div class="exam-top">
+      <div>
+        <div class="meta"><span class="badge exam">Prova di economia aziendale</span><span class="badge">Soluzione semplificata</span><span class="time"><svg width="14" height="14"><use href="#i-clock"/></svg>24 min</span></div>
+        <h3>Epsilon spa · bilancio 2025 e 2026</h3>
+        <p>La soluzione semplificata, come l'abbiamo fatta in classe.</p>
+        <div class="inside"><span>Argomenti dentro:</span><a href="#arg-personale">Personale e TFR</a><a href="#arg-capitale">Aumento di capitale</a><a href="#arg-immobilizzazioni">Manutenzione straordinaria</a><a href="#arg-rimanenze">Rimanenze</a></div>
+      </div>
+      <div class="files">
+        <a class="file main" href="Prova_Economia_aziendale_Epsilon_spa.pdf" target="_blank" rel="noopener"><svg><use href="#i-exam"/></svg>Il testo</a>
+        <a class="file alt" href="Soluzione_semplificata_Epsilon_spa.pdf" target="_blank" rel="noopener"><svg><use href="#i-doc"/></svg>La soluzione</a>
+      </div>
+    </div>
+    <div class="feature" id="epsilon-semplificata">
+      <div class="player"><div class="inner" data-video="epsilon"></div></div>
+      <div class="chap"><p class="d">Scegli il capitolo:</p><ol class="chapters" data-for="epsilon"></ol></div>
     </div>
   </article>
 
-  <article class="lesson" id="riepilogo-personale">
-    <div class="player" data-video="riepilogo"></div>
-    <div class="body">
-      <div class="meta"><span class="badge">Riepilogo</span><span class="time"><svg width="14" height="14"><use href="#i-clock"/></svg>6 min</span></div>
-      <h3>Costi del personale: 2025 o 2026?</h3>
-      <p class="d">Quali numeri usare nella prova: i costi e il debito per TFR del 2025, i salari del 2026 per scritture, banca e TFR. Con l'indennità di malattia e il mastrino dei debiti verso istituti previdenziali.</p>
-      <div class="files">
-        <a class="file main" href="Riepilogo_costi_del_personale.pdf" target="_blank" rel="noopener"><svg><use href="#i-doc"/></svg>Scheda con esempio e scritture</a>
+  <article class="exam-card" id="sigma">
+    <div class="exam-top">
+      <div>
+        <div class="meta"><span class="badge exam">Prova di economia aziendale · 9/11</span><span class="time"><svg width="14" height="14"><use href="#i-clock"/></svg>2 versioni</span></div>
+        <h3>Sigma spa · bilancio 2025 e 2026</h3>
+        <p>La stessa prova risolta in due modi: cambia solo il calcolo dei costi del personale.</p>
+        <div class="inside"><span>Argomenti dentro:</span><a href="#arg-personale">Personale e TFR</a><a href="#arg-capitale">Aumenti di capitale</a><a href="#arg-immobilizzazioni">Vendita e acquisto impianti</a></div>
       </div>
+      <div class="files">
+        <a class="file main" href="Prova_Economia_aziendale_Sigma_spa.pdf" target="_blank" rel="noopener"><svg><use href="#i-exam"/></svg>La traccia</a>
+        <a class="file alt" href="Riepilogo_costi_del_personale.pdf" target="_blank" rel="noopener"><svg><use href="#i-doc"/></svg>Riepilogo personale</a>
+        <a class="file alt" href="Sigma_spa_costi_del_personale.pdf" target="_blank" rel="noopener"><svg><use href="#i-doc"/></svg>Scheda personale (sistema)</a>
+      </div>
+    </div>
+    <div class="tabs" role="tablist" aria-label="Versione della soluzione">
+      <button role="tab" id="tab-sigma-semplice" aria-controls="sigma-semplice" aria-selected="true">Risoluzione più semplice · 26 min</button>
+      <button role="tab" id="tab-sigma-sistema" class="hard" aria-controls="sigma-sistema" aria-selected="false">Con il sistema · DIFFICILE! · 31 min</button>
+    </div>
+    <div class="feature" id="sigma-semplice" role="tabpanel" aria-labelledby="tab-sigma-semplice">
+      <div class="player"><div class="inner" data-video="sigma"></div></div>
+      <div class="chap"><p class="d">Costi del personale con il metodo visto in classe (debito TFR 2024 ipotizzato a 550.000). Scegli il capitolo:</p><ol class="chapters" data-for="sigma"></ol></div>
+    </div>
+    <div class="feature" id="sigma-sistema" role="tabpanel" aria-labelledby="tab-sigma-sistema" hidden>
+      <div class="player"><div class="inner" data-video="sigma_sistema"></div></div>
+      <div class="chap"><p class="d"><span class="hardtxt">Con la risoluzione del sistema per i costi del personale: DIFFICILE!</span> Scegli il capitolo:</p><ol class="chapters" data-for="sigma_sistema"></ol></div>
     </div>
   </article>
 
-  <article class="lesson" id="aumento-pagamento">
-    <div class="player" data-video="pagamento"></div>
-    <div class="body">
-      <div class="meta"><span class="badge">Lezione 2</span><span class="time"><svg width="14" height="14"><use href="#i-clock"/></svg>5 min</span></div>
-      <h3>Aumento di capitale a pagamento</h3>
-      <p class="d">Nuove azioni e sovrapprezzo, sottoscrizione e versamento, la fattura del notaio con la ritenuta d'acconto.</p>
+  <article class="exam-card" id="alfa">
+    <div class="exam-top">
+      <div>
+        <div class="meta"><span class="badge exam">Esame di Stato 2018</span><span class="time"><svg width="14" height="14"><use href="#i-clock"/></svg>35 min</span></div>
+        <h3>Alfa spa · bilancio 2016 e 2017</h3>
+        <p>Una vera prova di maturità: la prima parte svolta passo per passo.</p>
+        <div class="inside"><span>Argomenti dentro:</span><a href="#arg-personale">Personale e TFR</a><a href="#arg-capitale">Aumento di capitale</a><a href="#arg-immobilizzazioni">Vendita e nuovo impianto</a></div>
+      </div>
       <div class="files">
-        <a class="file main" href="Scheda_2_aumento_di_capitale_a_pagamento.pdf" target="_blank" rel="noopener"><svg><use href="#i-doc"/></svg>Scheda di studio</a>
-        <a class="file alt" href="appunti_aumento_di_capitale.pdf" target="_blank" rel="noopener"><svg><use href="#i-pen"/></svg>Appunti della prof</a>
+        <a class="file main" href="traccia_esame_2018_Alfa_spa.pdf" target="_blank" rel="noopener"><svg><use href="#i-exam"/></svg>La traccia</a>
+        <a class="file alt" href="Scheda_Alfa_spa_prova_esame_2018.pdf" target="_blank" rel="noopener"><svg><use href="#i-doc"/></svg>Scheda di studio</a>
       </div>
     </div>
-  </article>
-
-  <article class="lesson" id="immobilizzazioni">
-    <div class="player" data-video="immobilizzazioni"></div>
-    <div class="body">
-      <div class="meta"><span class="badge">Lezione 3</span><span class="time"><svg width="14" height="14"><use href="#i-clock"/></svg>5 min</span></div>
-      <h3>Vendita e acquisto di immobilizzazioni</h3>
-      <p class="d">Ammortamento fino alla vendita, valore contabile netto, plusvalenze e minusvalenze, il bene nuovo e il suo primo ammortamento.</p>
-      <div class="files">
-        <a class="file main" href="Scheda_3_vendita_e_acquisto_immobilizzazioni.pdf" target="_blank" rel="noopener"><svg><use href="#i-doc"/></svg>Scheda di studio</a>
-      </div>
-    </div>
-  </article>
-
-  <article class="lesson" id="aumento-gratuito">
-    <div class="player" data-video="gratuito"></div>
-    <div class="body">
-      <div class="meta"><span class="badge">Lezione 4</span><span class="time"><svg width="14" height="14"><use href="#i-clock"/></svg>5 min</span></div>
-      <h3>Aumento di capitale gratuito</h3>
-      <p class="d">Le riserve diventano capitale sociale: il patrimonio netto non cambia. Con il confronto con l'aumento a pagamento.</p>
-      <div class="files">
-        <a class="file main" href="Scheda_4_aumento_di_capitale_gratuito.pdf" target="_blank" rel="noopener"><svg><use href="#i-doc"/></svg>Scheda di studio</a>
-        <a class="file alt" href="appunti_aumento_di_capitale.pdf" target="_blank" rel="noopener"><svg><use href="#i-pen"/></svg>Appunti della prof</a>
-      </div>
+    <div class="feature">
+      <div class="player"><div class="inner" data-video="alfa"></div></div>
+      <div class="chap"><p class="d">Scegli il capitolo:</p><ol class="chapters" data-for="alfa"></ol></div>
     </div>
   </article>
 </section>
-
-<div class="section-title" id="alfa"><h2>Prova d'esame · Alfa spa</h2><p>Esame di Stato 2018 · prima parte svolta passo per passo</p></div>
-<article class="feature">
-  <div class="player"><div class="inner" data-video="alfa"></div></div>
-  <div class="chap">
-    <div class="meta"><span class="badge">Esame di Stato 2018</span><span class="time"><svg width="14" height="14"><use href="#i-clock"/></svg>35 min</span></div>
-    <h3>Il bilancio 2016 e 2017</h3>
-    <p class="d">Scegli il capitolo:</p>
-    <ol data-for="alfa"></ol>
-    <div class="files">
-      <a class="file main" href="Scheda_Alfa_spa_prova_esame_2018.pdf" target="_blank" rel="noopener"><svg><use href="#i-doc"/></svg>Scheda di studio</a>
-      <a class="file alt" href="traccia_esame_2018_Alfa_spa.pdf" target="_blank" rel="noopener"><svg><use href="#i-exam"/></svg>La traccia</a>
-    </div>
-  </div>
-</article>
 
 <div class="section-title" id="stampa"><h2>Da stampare</h2><p>Stato patrimoniale e conto economico con due anni a confronto</p></div>
 <section class="print" aria-label="Da stampare">
@@ -307,7 +423,7 @@ const VIDEO = {
   gratuito:         { youtube: "", mp4: "video_lezione_4_aumento_gratuito.mp4",                 poster: "poster_lezione_4_aumento_gratuito.jpg" },
   alfa:             { youtube: "", mp4: "video_Alfa_spa_esame_2018.mp4",                       poster: "poster_Alfa_spa_esame_2018.jpg" },
 };
-/* capitoli del video di Alfa spa (secondi dall'inizio) */
+/* capitoli dei video (secondi dall'inizio) */
 const CHAPTERS = {
 rimanenze: [
   [0,   "Giacenze e rimanenze"],
@@ -458,6 +574,30 @@ document.querySelectorAll("ol[data-for]").forEach(list => {
     };
     li.appendChild(btn); list.appendChild(li);
   });
+});
+/* PROVE: Sigma spa ha due versioni in schede (tab). */
+function showTab(id) {
+  document.querySelectorAll('.tabs [role="tab"]').forEach(t => {
+    const on = t.getAttribute("aria-controls") === id;
+    t.setAttribute("aria-selected", on ? "true" : "false");
+    const panel = document.getElementById(t.getAttribute("aria-controls"));
+    if (!on) { const v = panel.querySelector("video"); if (v) v.pause(); }
+    panel.hidden = !on;
+  });
+}
+document.querySelectorAll('.tabs [role="tab"]').forEach(t => t.onclick = () => showTab(t.getAttribute("aria-controls")));
+if (location.hash === "#sigma-sistema") showTab("sigma-sistema");
+
+/* "Lo ritrovi nelle prove": apre la prova al capitolo giusto. */
+document.querySelectorAll("[data-jump]").forEach(b => b.onclick = () => {
+  const [key, t] = b.dataset.jump.split(":"), start = +t;
+  const box = document.querySelector(`[data-video="${key}"]`);
+  const panel = box.closest('[role="tabpanel"]');
+  if (panel) showTab(panel.id);
+  const list = document.querySelector(`ol[data-for="${key}"]`);
+  if (list) list.querySelectorAll("button").forEach((x, i) => x.classList.toggle("on", (CHAPTERS[key] || [])[i] && CHAPTERS[key][i][0] === start));
+  box.closest(".exam-card").scrollIntoView({ behavior: "smooth", block: "start" });
+  mount(box, key, start);
 });
 </script>
 </body>
